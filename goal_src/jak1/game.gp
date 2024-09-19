@@ -1674,6 +1674,9 @@
 (build-custom-level "lltest2")
 (custom-level-cgo "LT2.DGO" "lltest2/lltest2.gd")
 
+(build-custom-level "overgrown")
+(custom-level-cgo "OVG.DGO" "overgrown/overgrown.gd")
+
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Game Engine Code
 ;;;;;;;;;;;;;;;;;;;;;
@@ -2117,6 +2120,13 @@
 (goal-src "pc/debug/pc-debug-common.gc" "pckernel-impl" "entity-h" "game-info-h" "level-h" "settings-h" "gsound-h" "target-util")
 (goal-src "pc/debug/pc-debug-methods.gc" "pc-debug-common")
 (goal-src "levels/test-zone/test-zone-obs.gc" "process-drawable")
+
+(goal-src-sequence
+ "levels/overgrown/"
+ :deps ("$OUT/obj/ticky.o") ;; custom code to include parts and obs
+ "overgrown-part.gc"
+ )
+
 
 (group-list "all-code"
   `(,@(reverse *all-gc*))

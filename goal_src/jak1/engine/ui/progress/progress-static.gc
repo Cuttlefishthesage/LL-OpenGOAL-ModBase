@@ -277,7 +277,8 @@
   (cave 13)
   (lavatube 14)
   (citadel 15)
-  (max 16))
+  (overgrown 16)
+  (max 17))
 
 ;; maps level-info indices to the appropriate offset in *level-task-data*
 (define *level-task-data-remap*
@@ -313,6 +314,7 @@
        (level-task-data-index training) ;; default-level 26
        (level-task-data-index village1) ;; test-zone 27
        (level-task-data-index training) ;; lltest2 28
+       (level-task-data-index overgrown) ;; overgrown
        ))
 
 ;; maps goal language ID to its name string ID
@@ -1401,7 +1403,77 @@
                       'task-info-data
                       :task-id (game-task citadel-buzzer)
                       :task-name
-                      (new 'static 'array text-id 4 (text-id citadel-buzzer) (text-id citadel-buzzer) (text-id citadel-buzzer) (text-id zero)))))))
+                      (new 'static 'array text-id 4 (text-id citadel-buzzer) (text-id citadel-buzzer) (text-id citadel-buzzer) (text-id zero)))))
+     (new 'static 'level-tasks-info
+              :level-name-id (text-id overgrown)
+              :text-group-index 3
+              :nb-of-tasks 6
+              :buzzer-task-index 5
+              :task-info
+              (new 'static 'array task-info-data 8
+                   (new 'static 'task-info-data
+                        :task-id (game-task overgrown-nettlecell)
+                        :task-name
+                        (new 'static 'array text-id 4
+                             (text-id overgrown-nettlecell)
+                             (text-id overgrown-nettlecell)
+                             (text-id overgrown-nettlecell)
+                             (text-id zero)
+                             )
+                        )
+                   (new 'static 'task-info-data
+                        :task-id (game-task overgrown-treecell)
+                        :task-name
+                        (new 'static 'array text-id 4
+                             (text-id overgrown-treecell)
+                             (text-id overgrown-treecell)
+                             (text-id overgrown-treecell)
+                             (text-id zero)
+                             )
+                        )
+                   (new 'static 'task-info-data
+                        :task-id (game-task overgrown-cavecell)
+                        :task-name
+                        (new 'static 'array text-id 4
+                             (text-id overgrown-cavecell)
+                             (text-id overgrown-cavecell)
+                             (text-id overgrown-cavecell)
+                             (text-id zero)
+                             )
+                        )
+                    (new 'static 'task-info-data
+                        :task-id (game-task overgrown-muse)
+                        :task-name
+                        (new 'static 'array text-id 4
+                             (text-id overgrown-muse)
+                             (text-id overgrown-muse)
+                             (text-id overgrown-muse)
+                             (text-id zero)
+                             )
+                        )
+                    (new 'static 'task-info-data
+                        :task-id (game-task overgrown-buzzer)
+                        :task-name
+                        (new 'static 'array text-id 4
+                             (text-id generic-buzzer)
+                             (text-id generic-buzzer)
+                             (text-id generic-buzzer)
+                             (text-id zero)
+                             )
+                        )
+                    (new 'static 'task-info-data
+                        :task-id (game-task overgrown-treasure)
+                        :task-name
+                        (new 'static 'array text-id 4
+                             (text-id overgrown-treasure)
+                             (text-id overgrown-treasure)
+                             (text-id overgrown-treasure)
+                             (text-id zero)
+                             )
+                        )
+                   )
+              )
+                      ))
 
 ;; goes down by 24 or 23 every time
 (define *task-egg-starting-x* (new 'static 'boxed-array :type int32 218 194 171 147 124 100 77 53 30))

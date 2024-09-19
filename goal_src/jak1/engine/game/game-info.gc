@@ -148,6 +148,8 @@
   ;; Custom game counts here. Example:
   ;; (set! (-> *game-counts* data 16 money-count) 150)
   ;; (set! (-> *game-counts* data 16 buzzer-count) 7)
+  (set! (-> *game-counts* data 16 money-count) (the-as int 165)) ;; number 16 is overgrowns level count found in progress-static
+  (set! (-> *game-counts* data 16 buzzer-count) (the-as int 7))
   (let ((total-cells 0)
         (total-buzzers 0)
         (total-orbs 0))
@@ -195,7 +197,7 @@
                       (continue-point-override (empty) continue-point-override)
                       ((!= *kernel-boot-message* 'play) "demo-start")
                       (*debug-segment*
-                       "lltest2-start" ;"village1-hut"
+                       "overgrown-warp" ;"village1-hut"
                        )
                       (else "title-start")))
      (set! (-> this auto-save-count) 0)

@@ -99,7 +99,7 @@
 (defmethod nav-enemy-method-51 ((this muse))
   (dotimes (s5-0 2)
     (let ((v1-2 (rand-vu-int-range 3 (+ (-> this node-list length) -1))))
-      (launch-particles (-> *part-id-table* 271) (vector<-cspace! (new 'stack-no-clear 'vector) (-> this node-list data v1-2)))))
+      (launch-particles (-> *part-id-table* 271) (vector<-cspace! (new 'stack-no-clear 'vector) (-> this node-list data v1-2))))) ;;271 is default. 260 is pretty blue. 277 is green eco effect. 279 is sparkly green.
   0
   (none))
 
@@ -129,7 +129,7 @@ nav-enemy-default-event-handler
   :event nav-enemy-default-event-handler
   :trans
     (behavior ()
-      (seek! (-> self sprint-distance) 61440.0 (* 8192.0 (seconds-per-frame)))
+      (seek! (-> self sprint-distance) 61440.0 (* 8192.0 (seconds-per-frame))) ;; value is how long the muse can sprint for
       (if (and *target* (>= 102400.0 (vector-vector-distance (-> self collide-info trans) (-> *target* control trans))))
         (level-hint-spawn (text-id zero) (the-as string #f) (-> self entity) *entity-pool* (game-task none)))
       (if (and *target* (>= 81920.0 (vector-vector-distance (-> self collide-info trans) (-> *target* control trans))))
@@ -168,7 +168,7 @@ nav-enemy-default-event-handler
         ((or (not *target*)
              (< (-> self sprint-distance) (vector-vector-distance (-> self collide-info trans) (-> *target* control trans))))
          (set! (-> self target-speed) 40960.0))
-        (else (set! (-> self target-speed) 61440.0)))
+        (else (set! (-> self target-speed) 61440.0))) ;; sprint speed of muse
       (seek! (-> self sprint-distance) 0.0 (* 4096.0 (seconds-per-frame)))
       (muse-check-dest-point))
   :code
