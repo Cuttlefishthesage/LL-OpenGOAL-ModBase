@@ -2663,7 +2663,7 @@
              (new 'static 'array float 9 0.0116  -0.1211  -0.9925 -0.0000  0.9926 -0.1211 0.9999 0.0014 0.0115)
              :load-commands
              '()
-             :vis-nick 'none
+             :vis-nick 'ovg
              :lev0 'overgrown
              :disp0 'display
              :lev1 #f
@@ -2678,7 +2678,7 @@
         :camera-rot
              (new 'static 'array float 9 -0.0116  0.1211  0.9925 0.0000  -0.9926 0.1211 -0.9999 -0.0014 -0.0115)
         :load-commands '()
-        :vis-nick #f
+        :vis-nick 'ovg
         :lev0 'overgrown
         :disp0 'display
         :lev1 #f
