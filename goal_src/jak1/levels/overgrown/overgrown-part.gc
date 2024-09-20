@@ -207,8 +207,8 @@
    (victory-anim       spool-anim)
    (old-target-pos     transformq :inline))
   (:states
-   muse-caught
-   muse-idle))
+   muse-overgrown-caught
+   muse-overgrown-idle))
 
 (deftype point-on-path-segment-info (structure)
   ((point               vector :inline)
@@ -307,14 +307,14 @@
   :shadow muse-shadow-mg)
 
 (defmethod touch-handler ((this muse-overgrown) (arg0 process) (arg1 event-message-block))
-  (go muse-caught))
+  (go muse-overgrown-caught))
 
 (defmethod attack-handler ((this muse-overgrown) (arg0 process) (arg1 event-message-block))
-  (go muse-caught))
+  (go muse-overgrown-caught))
 
 nav-enemy-default-event-handler
 
-(defstate muse-idle (muse-overgrown)
+(defstate muse-overgrown-idle (muse-overgrown)
   :event nav-enemy-default-event-handler
   :trans
     (behavior ()
@@ -353,7 +353,7 @@ nav-enemy-default-event-handler
       (cond
         ((or (not *target*) (< 202400.0 (vector-vector-distance (-> self collide-info trans) (-> *target* control trans)))) ;; distance in which the muse can be from you.
          (set! (-> self target-speed) 0.0)
-         (if (= (-> self momentum-speed) 0.0) (go muse-idle)))
+         (if (= (-> self momentum-speed) 0.0) (go muse-overgrown-idle)))
         ((or (not *target*)
              (< (-> self sprint-distance) (vector-vector-distance (-> self collide-info trans) (-> *target* control trans))))
          (set! (-> self target-speed) 40960.0))
@@ -412,7 +412,7 @@ nav-enemy-default-event-handler
         (ja :num! (seek! max 0.8)))
       (go-virtual nav-enemy-chase)))
 
-(defstate muse-caught (muse-overgrown)
+(defstate muse-overgrown-caught (muse-overgrown)
   :event #f
   :trans
     (behavior ()
@@ -576,7 +576,7 @@ nav-enemy-default-event-handler
   (set! (-> this anim)
         (new 'static 'spool-anim :name "muse-victory" :index 9 :parts 2 :command-list '((1 blackout 0) (219 blackout 60))))
   (set! (-> this victory-anim) (fuel-cell-pick-anim this))
-  (go muse-idle)
+  (go muse-overgrown-idle)
   (none))
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; WARPGATE ANIM ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
