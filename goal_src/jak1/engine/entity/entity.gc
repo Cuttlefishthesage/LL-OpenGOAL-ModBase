@@ -14403,11 +14403,11 @@
             (new 'static 'vector4ub :data (new 'static 'array uint8 4 #xba #x6a #x55 #xf9))
             (new 'static 'vector4ub :data (new 'static 'array uint8 4 #xe5 #x55 #xaa #xf6)))))
       (entity-nav-login this))))
-    
-      
-  
 
-      
+
+
+
+
 
 (defmethod birth! ((this entity-actor))
   "Create a process for this entity and start it."

@@ -579,7 +579,7 @@ nav-enemy-default-event-handler
   (go muse-idle)
   (none))
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; WARPGATE ANIM ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  
+
   (defpartgroup group-overgrown-warpgate
   :id 150
   :bounds (static-bspherem 0 0 0 8)
@@ -793,7 +793,7 @@ nav-enemy-default-event-handler
 (defpart 766
   :init-specs ((:texture (new 'static 'texture-id :index #x4 :page #x2))
     (:num 1.0)
-    (:x (meters -11.0666667)) ;; THE ROTATION FIELD. 
+    (:x (meters -11.0666667)) ;; THE ROTATION FIELD.
     (:y (meters 4))
     (:z (meters 5.4) (meters 1))
     (:scale-x (meters 0.2) (meters 0.1))
@@ -918,7 +918,7 @@ nav-enemy-default-event-handler
     (set! (-> s5-0 nav-radius) (* 0.75 (-> s5-0 root-prim local-sphere w)))
     (backup-collide-with-as s5-0)
     (set! (-> this root) s5-0))
-    
+
   0
   (none))
 
@@ -929,12 +929,12 @@ nav-enemy-default-event-handler
   (update-transforms! (-> this root))
   0
   (none))
-  
+
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;GENERIC BUTTON;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (deftype overgrown-switch (basebutton)
   ((fcell-handle handle)))
- 
+
 (defmethod init-from-entity! ((this overgrown-switch) (arg0 entity-actor))
   (reset! this)
   (set! (-> this spawned-by-other?) #f)
@@ -947,7 +947,7 @@ nav-enemy-default-event-handler
     (if (< (-> this button-id) 0) (set! (-> this button-id) (actor-count-before (-> this link)))))
   (basebutton-method-27 this)
   (process-drawable-from-entity! this arg0)
- 
+
   (set! (-> this notify-actor) (entity-actor-lookup arg0 'alt-actor 0))
   (set! (-> this timeout) (res-lump-float arg0 'timeout))
   (if (not (-> this spawned-by-other?)) (nav-mesh-connect this (-> this root) (the-as nav-control #f)))
@@ -955,7 +955,7 @@ nav-enemy-default-event-handler
   (basebutton-method-26 this)
   (go (method-of-object this basebutton-startup))
   (none))
- 
+
 (defstate basebutton-up-idle (overgrown-switch)
   :virtual #t
   :event
@@ -969,9 +969,9 @@ nav-enemy-default-event-handler
           (go-virtual basebutton-going-down)
           (close-specific-task! (-> self entity extra perm task) (task-status need-resolution))
           (entity-task-complete-on (-> self entity))
-          
 
-          
+
+
           )
          )
        )

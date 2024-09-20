@@ -186,7 +186,7 @@
 
         )
     (format 0 "SELF MAX-SLOT: ~D~%" (-> self max-slot))
-    
+
     (local-vars (sv-112 int) (sv-128 int) (sv-144 int))
       (let ((gp-0 (get-next-slot-up self (+ (-> self level-slot) -1))))
         0
@@ -295,7 +295,7 @@
             (else -1)))
 
             (format 0 "SELF LEVEL-SLOT: ~D~%" (-> self level-slot)))
-  
+
   (go-virtual idle)
   (none))
 
