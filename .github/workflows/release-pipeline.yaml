@@ -1,6 +1,7 @@
 name: 🏭 Release Pipeline
 
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ["🏭 Draft Release"]
     types:
