@@ -197,7 +197,7 @@
                       (continue-point-override (empty) continue-point-override)
                       ((!= *kernel-boot-message* 'play) "demo-start")
                       (*debug-segment*
-                       "overgrown-warp" ;"village1-hut"
+                       "village1-hut" ;"village1-hut"
                        )
                       (else "title-start")))
      (set! (-> this auto-save-count) 0)
