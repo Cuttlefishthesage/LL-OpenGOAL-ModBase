@@ -60,7 +60,7 @@
 
   // All art groups you want to use in your custom level. Will add their models and corresponding textures to the FR3 file.
   // Note: You will still have to add them to your level's .gd file.
-   "art_groups": ["plat-ag", "water-anim-jungle-ag", "water-anim-sunken-ag", "jng-iris-door-ag", "bounceytarp-ag", "orb-cache-top-ag","plat-eco-ag","muse-ag", "hopper-ag.go","junglesnake-ag","junglefish-ag", "aphid-lurker-ag", "kermit-ag", "basebutton-ag",
+   "art_groups": ["plat-ag", "water-anim-jungle-ag", "water-anim-sunken-ag", "jng-iris-door-ag", "bounceytarp-ag", "orb-cache-top-ag","plat-eco-ag","muse-ag", "hopper-ag","junglesnake-ag","junglefish-ag", "aphid-lurker-ag", "kermit-ag", "basebutton-ag",
     "lurkercrab-ag", "lurkerpuppy-ag", "babak-ag", "warp-gate-switch-ag", "warp-gate-ag", "plat-button-ag","generic-button-ag"],
 
   // If you have any custom models in the "custom_assets/jak1/models/custom_levels" folder that you want to use in your level, add them to this list.

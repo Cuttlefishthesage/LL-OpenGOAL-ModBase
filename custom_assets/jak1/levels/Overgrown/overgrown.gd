@@ -23,6 +23,7 @@
   "kermit.o"
   "lurkercrab.o"
   "lurkerpuppy.o"
+  "lurkercrab-ag.go"
   "plat-button-ag.go"
   "generic-button-ag.go"
   "warp-gate-switch-ag.go"
