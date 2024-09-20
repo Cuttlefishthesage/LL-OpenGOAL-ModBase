@@ -977,7 +977,7 @@
   (format 0 "*kernel-boot-message*: ~A~%" *kernel-boot-message*)
   ;;(kernel-shutdown)
   (let ((startup-level (case *kernel-boot-message*
-                         (('play) (if *debug-segment* 'lltest2 #f))
+                         (('play) (if *debug-segment* 'village1 'title)) ;; changed from lltest2 to village1
                          (else 'demo))))
     (stop 'play)
     (set! (-> *level* vis?) use-vis)

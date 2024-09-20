@@ -2120,6 +2120,7 @@
 (goal-src "pc/debug/pc-debug-common.gc" "pckernel-impl" "entity-h" "game-info-h" "level-h" "settings-h" "gsound-h" "target-util")
 (goal-src "pc/debug/pc-debug-methods.gc" "pc-debug-common")
 (goal-src "levels/test-zone/test-zone-obs.gc" "process-drawable")
+(goal-src "levels/overgrown/overgrown-obs.gc" "process-drawable")
 
 (goal-src-sequence
  "levels/overgrown/"
