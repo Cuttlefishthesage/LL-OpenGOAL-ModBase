@@ -475,11 +475,16 @@ nav-enemy-default-event-handler
 
              (send-event *target* 'trans 'restore (-> self old-target-pos))
 
-             (send-event *camera* 'teleport 'no-intro (-> self old-target-pos))
+             (send-event *camera* 'teleport (-> self old-target-pos))
+             
+             (send-event *camera* 'no-intro)
+             (send-event *camera* 'clear-entity)
+             (send-event *camera* 'force-blend 0)
+             (send-event *camera* 'change-state cam-fixed 0)
+             (send-event *camera* 'change-state cam-string 0)
 
              (suspend))
-             (set-blackout-frames 0)
-             (set-blackout-frames (seconds 0.5))
+             
                ))
           (else
             (format 0 "Inside play mode branch.~%")
@@ -1030,3 +1035,9 @@ nav-enemy-default-event-handler
               ((trainingcam-lod0-mg (meters 999999)))
               :bounds (static-spherem 0 0 0 80)
               )
+
+;;;;;;;;;;;;;;;;TIME OF DAY;;;;;;;;;;;;;;;;;;;;;;;;;;
+       (set! (-> *time-of-day-proc* 0 hour) 12)
+       (set! (-> *time-of-day-proc* 0 minute) 0)
+       (set! (-> *time-of-day-proc* 0 second) 0)
+       (set! (-> *time-of-day-proc* 0 frame) 0)
