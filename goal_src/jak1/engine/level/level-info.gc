@@ -2640,7 +2640,7 @@
        '()
        :sound-banks
        '()
-       :music-bank 'beach
+       :music-bank 'fishgame
        :ambient-sounds
        '()
        :mood '*jungle-mood*
@@ -2675,6 +2675,21 @@
         :trans (new 'static 'vector :x (meters 1018.36) :y (meters 3.47) :z (meters -5.51) :w 1.0) ;; 1018.36   3.41  -5.47
         :quat (new 'static 'quaternion :x -0.1204 :y -0.1174 :z 0.6881 :w 0.7057)
         :camera-trans (new 'static 'vector :x (meters 1027.0) :y (meters 0.5) :z (meters -5.71) :w 1.0)
+        :camera-rot
+             (new 'static 'array float 9 -0.0116  0.1211  0.9925 0.0000  -0.9926 0.1211 -0.9999 -0.0014 -0.0115)
+        :load-commands '()
+        :vis-nick 'ovg
+        :lev0 'overgrown
+        :disp0 'display
+        :lev1 #f
+        :disp1 #f
+        )
+        (new 'static 'continue-point
+        :name "overgrown-checkpoint"
+        :level 'overgrown
+        :trans (new 'static 'vector :x (meters 1369.66) :y (meters 55.94) :z (meters -25.24) :w 1.0) ;; 1018.36   3.41  -5.47 1369.66  55.94 -25.24
+        :quat (new 'static 'quaternion :x -0.1204 :y -0.1174 :z 0.6881 :w 0.7057)
+        :camera-trans (new 'static 'vector :x (meters 1372.0) :y (meters -56.61) :z (meters 25.51) :w 1.0)
         :camera-rot
              (new 'static 'array float 9 -0.0116  0.1211  0.9925 0.0000  -0.9926 0.1211 -0.9999 -0.0014 -0.0115)
         :load-commands '()

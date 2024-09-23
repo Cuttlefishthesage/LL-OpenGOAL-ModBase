@@ -61,7 +61,7 @@
   // All art groups you want to use in your custom level. Will add their models and corresponding textures to the FR3 file.
   // Note: You will still have to add them to your level's .gd file.
    "art_groups": ["plat-ag", "water-anim-jungle-ag", "water-anim-sunken-ag", "jng-iris-door-ag", "bounceytarp-ag", "orb-cache-top-ag","plat-eco-ag","muse-ag", "hopper-ag","junglesnake-ag","junglefish-ag", "aphid-lurker-ag", "kermit-ag", "basebutton-ag",
-    "lurkercrab-ag", "lurkerpuppy-ag", "babak-ag", "warp-gate-switch-ag", "warp-gate-ag", "plat-button-ag","generic-button-ag"],
+    "lurkercrab-ag", "lurkerpuppy-ag", "babak-ag", "warp-gate-switch-ag", "warp-gate-ag", "plat-button-ag","generic-button-ag", "trainingcam-ag"],
 
   // If you have any custom models in the "custom_assets/jak1/models/custom_levels" folder that you want to use in your level, add them to this list.
   // Note: Like with art groups, these should also be added to your level's .gd file.
@@ -848,6 +848,18 @@
           "bsphere": [ 1775.19, 93.65, -126.17, 50 ], // bounding sphere
           "lump": {
             "name": "overgrownbutterflies27",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+
+        {
+          "trans": [ 1652.32, 48.22, 10.01 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1652.32, 48.22, 10.01, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies28",
             "art-name": "group-village1-butterflies"
           }
         },        
@@ -3213,7 +3225,7 @@
 
   /////////////////////////////////////////////////// POWER CELLS //////////////////////////////////////////////////
   {
-    "trans": [ 1049.81, 5.40, -57.99 ], // translation
+    "trans": [ 1049.81, 4.40, -57.99 ], // translation
     "etype": "fuel-cell", // actor type
     "game_task": "(game-task overgrown-cavecell)", // associated game task
     "quat": [ 0, 0, 0, 1 ], // quaternion
@@ -3224,7 +3236,7 @@
     }
   },
   {
-    "trans": [ 1526.59, 73.28, 169.88 ], // translation
+    "trans": [ 1526.59, 72.28, 169.88 ], // translation
     "etype": "fuel-cell", // actor type
     "game_task": "(game-task overgrown-nettlecell)", // associated game task
     "quat": [ 0, 0, 0, 1 ], // quaternion
@@ -3235,7 +3247,7 @@
     }
   },
   {
-    "trans": [ 1792.58, 98.87, -112.89 ], // translation
+    "trans": [ 1792.58, 96.87, -112.89 ], // translation
     "etype": "fuel-cell", // actor type
     "game_task": "(game-task overgrown-treecell)", // associated game task
     "quat": [ 0, 0, 0, 1 ], // quaternion
@@ -3328,7 +3340,7 @@
     "crate-type": "'iron",
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 5 ],
-    "movie-pos": [ "meters", 1056.40, -0.54, -54.69 ]
+    "movie-pos": [ "meters", 1127.98, 16.51, 39.03 ]
   }
 },
 
@@ -3535,7 +3547,8 @@
         "play-mode": "'sidekick",
         "options": ["enum-uint32", "(fact-options skip-jump-anim)"],
         "cmds": ["int32", 7, 23],
-        "text-id":["int32", 635]
+        "text-id":["int32", 635],
+        "movie-pos": [ "meters", 1644.71, 47.52, 20.29 ]
       }
     },
 ///////////////////////////////////////////////////AREA ONE ENEMIES///////////////////////////////////////////
@@ -4310,7 +4323,7 @@
         "name": "overgrown-treasure-cell",
         "crate-type": "'steel",
         "eco-info": ["int32", 6, 121],
-        "movie-pos": [ "meters", 1482.67, 57.00, 79.84 ]
+        "movie-pos": [ "meters", 1482.67, 54.65, 79.84 ]
       }
     },
 

@@ -23,6 +23,7 @@
   "kermit.o"
   "lurkercrab.o"
   "lurkerpuppy.o"
+  "trainingcam-ag.go"
   "lurkercrab-ag.go"
   "plat-button-ag.go"
   "generic-button-ag.go"

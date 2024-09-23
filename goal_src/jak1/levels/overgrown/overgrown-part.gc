@@ -462,7 +462,8 @@ nav-enemy-default-event-handler
            (ja-channel-set! 0)
            (ja-post)
            (clear-collide-with-as (-> self collide-info))
-           (send-event *target* 'trans 'reset)
+           ;;(send-event *target* 'trans 'reset)
+           (send-event *target* 'trans 'restore (-> self old-target-pos))
            (let ((gp-4 (ppointer->handle (birth-pickup-at-point (target-pos 0)
                                                                 (pickup-type fuel-cell)
                                                                 (the float (-> self entity extra perm task))
@@ -471,7 +472,15 @@ nav-enemy-default-event-handler
                                                                 (the-as fact-info #f)))))
              (send-event (handle->process (the-as handle gp-4)) 'pickup)
              (while (handle->process (the-as handle gp-4))
-               (suspend))))
+             
+             (send-event *target* 'trans 'restore (-> self old-target-pos))
+
+             (send-event *camera* 'teleport 'no-intro (-> self old-target-pos))
+             
+             (suspend))
+             (set-blackout-frames 0)
+             (set-blackout-frames (seconds 0.5))
+               ))
           (else
             (format 0 "Inside play mode branch.~%")
            (send-event *target* 'trans 'restore (-> self old-target-pos))
@@ -867,6 +876,7 @@ nav-enemy-default-event-handler
     (:flags (bit2 bit3 bit7 bit14))
     )
   )
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;; IRIS DOOR ;;;;;;;;;;;;;;;;;;;;;;;;;
 (deftype overgrown-iris-door (eco-door) ())
 
@@ -890,9 +900,14 @@ nav-enemy-default-event-handler
                      )
                  )
             (go-virtual door-opening)
+            ;;(process-spawn pov-camera (static-vectorm 1051.06 3.29 -33.02) *training-cam-sg* "fuelcellcam" 5 #f '() )
             )
         (level-hint-spawn (text-id zero) (the-as string #f) (-> self entity) *entity-pool* (game-task none))
         )
+      
+     ;; (when (and (task-complete? *game-info* (game-task overgrown-button1)) (task-complete? *game-info* (game-task overgrown-button2)) (task-complete? *game-info* (game-task overgrown-button3))) 
+     ;; (process-spawn pov-camera (static-vectorm 1051.06 3.29 -33.02) *training-cam-sg* "fuelcellcam" 5 #f '() )
+     ;;  )
       (suspend)
       )
     )
@@ -933,13 +948,18 @@ nav-enemy-default-event-handler
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;GENERIC BUTTON;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (deftype overgrown-switch (basebutton)
-  ((fcell-handle handle)))
+  ((fcell-handle handle)
+  (door-anim-played? symbol)
+  
+  ))
+
 
 (defmethod init-from-entity! ((this overgrown-switch) (arg0 entity-actor))
   (reset! this)
   (set! (-> this spawned-by-other?) #f)
   (set! (-> this button-id) -1)
   (set! (-> this fcell-handle) (the-as handle #f))
+  (set! (-> this door-anim-played?) #f)
   (let ((v1-4 (res-lump-value (-> this entity) 'extra-id uint128 :default (the-as uint128 -1))))
     (if (>= (the-as int v1-4) 0) (set! (-> this button-id) (the-as int v1-4))))
   (when (or (res-lump-struct arg0 'next-actor structure) (res-lump-struct arg0 'prev-actor structure))
@@ -947,6 +967,9 @@ nav-enemy-default-event-handler
     (if (< (-> this button-id) 0) (set! (-> this button-id) (actor-count-before (-> this link)))))
   (basebutton-method-27 this)
   (process-drawable-from-entity! this arg0)
+  (let ((v1-16 (task-complete? *game-info* (-> this entity extra perm task))))
+  (set! (-> this down?) v1-16)
+  )
 
   (set! (-> this notify-actor) (entity-actor-lookup arg0 'alt-actor 0))
   (set! (-> this timeout) (res-lump-float arg0 'timeout))
@@ -969,9 +992,9 @@ nav-enemy-default-event-handler
           (go-virtual basebutton-going-down)
           (close-specific-task! (-> self entity extra perm task) (task-status need-resolution))
           (entity-task-complete-on (-> self entity))
-
-
-
+          (when (and (task-complete? *game-info* (game-task overgrown-button1)) (task-complete? *game-info* (game-task overgrown-button2)) (task-complete? *game-info* (game-task overgrown-button3)) (not (-> self door-anim-played?)) ) 
+          (process-spawn pov-camera (static-vectorm 1051.06 3.29 -33.02) *training-cam-sg* "fuelcellcam" 5 #f '() )) 
+          (set! (-> self door-anim-played?) #t)
           )
          )
        )
@@ -1000,3 +1023,10 @@ nav-enemy-default-event-handler
         (set! (-> self root trans quad) (-> self move-to-pos quad))
         (quaternion-copy! (-> self root quat) (-> self move-to-quat))
         (rider-post))))
+
+
+;;;;;;;;;;;;;;;;;;;;;; CAMERA ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defskelgroup *training-cam-sg* trainingcam trainingcam-lod0-jg -1
+              ((trainingcam-lod0-mg (meters 999999)))
+              :bounds (static-spherem 0 0 0 80)
+              )
