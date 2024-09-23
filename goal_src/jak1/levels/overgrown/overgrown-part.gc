@@ -472,11 +472,11 @@ nav-enemy-default-event-handler
                                                                 (the-as fact-info #f)))))
              (send-event (handle->process (the-as handle gp-4)) 'pickup)
              (while (handle->process (the-as handle gp-4))
-             
+
              (send-event *target* 'trans 'restore (-> self old-target-pos))
 
              (send-event *camera* 'teleport 'no-intro (-> self old-target-pos))
-             
+
              (suspend))
              (set-blackout-frames 0)
              (set-blackout-frames (seconds 0.5))
@@ -904,8 +904,8 @@ nav-enemy-default-event-handler
             )
         (level-hint-spawn (text-id zero) (the-as string #f) (-> self entity) *entity-pool* (game-task none))
         )
-      
-     ;; (when (and (task-complete? *game-info* (game-task overgrown-button1)) (task-complete? *game-info* (game-task overgrown-button2)) (task-complete? *game-info* (game-task overgrown-button3))) 
+
+     ;; (when (and (task-complete? *game-info* (game-task overgrown-button1)) (task-complete? *game-info* (game-task overgrown-button2)) (task-complete? *game-info* (game-task overgrown-button3)))
      ;; (process-spawn pov-camera (static-vectorm 1051.06 3.29 -33.02) *training-cam-sg* "fuelcellcam" 5 #f '() )
      ;;  )
       (suspend)
@@ -950,7 +950,7 @@ nav-enemy-default-event-handler
   (deftype overgrown-switch (basebutton)
   ((fcell-handle handle)
   (door-anim-played? symbol)
-  
+
   ))
 
 
@@ -992,8 +992,8 @@ nav-enemy-default-event-handler
           (go-virtual basebutton-going-down)
           (close-specific-task! (-> self entity extra perm task) (task-status need-resolution))
           (entity-task-complete-on (-> self entity))
-          (when (and (task-complete? *game-info* (game-task overgrown-button1)) (task-complete? *game-info* (game-task overgrown-button2)) (task-complete? *game-info* (game-task overgrown-button3)) (not (-> self door-anim-played?)) ) 
-          (process-spawn pov-camera (static-vectorm 1051.06 3.29 -33.02) *training-cam-sg* "fuelcellcam" 5 #f '() )) 
+          (when (and (task-complete? *game-info* (game-task overgrown-button1)) (task-complete? *game-info* (game-task overgrown-button2)) (task-complete? *game-info* (game-task overgrown-button3)) (not (-> self door-anim-played?)) )
+          (process-spawn pov-camera (static-vectorm 1051.06 3.29 -33.02) *training-cam-sg* "fuelcellcam" 5 #f '() ))
           (set! (-> self door-anim-played?) #t)
           )
          )

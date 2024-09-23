@@ -1499,7 +1499,7 @@
                   (static-load-boundary :flags (player )
                   ;;     y top                y bottom
                   :top (meters 66.73)  :bot (meters 44.63)
-                  ;;          point 0 x        point 0 z      point 1 x        point 1 z 
+                  ;;          point 0 x        point 0 z      point 1 x        point 1 z
                   :points (  (meters 1367.41) (meters -38.67)  (meters 1365) (meters 15.31) )
                   :fwd (checkpt "overgrown-checkpoint" #f)
                   :bwd (checkpt "overgrown-warp" #f)
