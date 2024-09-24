@@ -998,7 +998,7 @@ nav-enemy-default-event-handler
           (close-specific-task! (-> self entity extra perm task) (task-status need-resolution))
           (entity-task-complete-on (-> self entity))
           (when (and (task-complete? *game-info* (game-task overgrown-button1)) (task-complete? *game-info* (game-task overgrown-button2)) (task-complete? *game-info* (game-task overgrown-button3)) (not (-> self door-anim-played?)) )
-          (process-spawn pov-camera (static-vectorm 1051.06 3.29 -33.02) *training-cam-sg* "fuelcellcam" 5 #f '() ))
+          (process-spawn pov-camera (static-vectorm 1051.06 3.29 -33.02) *training-cam-sg* "fuelcellcam" 5 #f '() :to self ))
           (set! (-> self door-anim-played?) #t)
           )
          )

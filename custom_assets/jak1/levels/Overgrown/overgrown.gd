@@ -9,6 +9,7 @@
   "jungleb-obs.o"
   "sunken-water.o"
   "training-part.o"
+  "training-obs.o"
   "overgrown-part.o"
   "villagep-obs.o"
   "village1-part.o"
