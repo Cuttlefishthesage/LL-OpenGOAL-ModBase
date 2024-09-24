@@ -3269,7 +3269,8 @@
     "crate-type": "'iron",
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 0 ],
-    "movie-pos": [ "meters", 1284.30, 46.67, -58.34 ]
+   // "movie-pos": [ "meters", 1284.30, 46.67, -58.34 ],
+    "movie-pos": ["movie-pos", [1284.30, 46.67, -58.34, -10.0]]
   }
 },
 {
@@ -3283,7 +3284,8 @@
     "crate-type": "'iron",
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 1 ],
-    "movie-pos": [ "meters", 1380.15, 58.25, 80.99 ]
+    //"movie-pos": [ "meters", 1380.15, 58.25, 80.99 ]
+    "movie-pos": ["movie-pos", [1380.15, 58.25, 80.99, 80.0]]
   }
 },
 {
@@ -3297,7 +3299,8 @@
     "crate-type": "'iron",
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 2 ],
-    "movie-pos": [ "meters", 1559.51, 47.77, 153.46 ]
+    //"movie-pos": [ "meters", 1559.51, 47.77, 153.46 ]
+    "movie-pos": ["movie-pos", [1559.51, 47.77, 153.46, 22.0]]
   }
 },
 {
@@ -3311,7 +3314,8 @@
     "crate-type": "'iron",
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 3 ],
-    "movie-pos": [ "meters", 1626.92, 46.29, -26.57 ]
+    //"movie-pos": [ "meters", 1626.92, 46.29, -26.57 ]
+    "movie-pos": ["movie-pos", [1626.92, 46.29, -26.57, 87.0]]
   }
 },
 {
@@ -3325,7 +3329,8 @@
     "crate-type": "'iron",
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 4 ],
-    "movie-pos": [ "meters", 1827.42, 69.14, -140.14 ]
+    //"movie-pos": [ "meters", 1827.42, 69.14, -140.14 ]
+    "movie-pos": ["movie-pos", [1827.42, 69.14, -140.14, 1.0]]
   }
 },
 {
@@ -3354,7 +3359,8 @@
     "crate-type": "'iron",
     //"eco-info": [ "int32", 8, 116 ],
     "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 6 ],
-    "movie-pos": [ "meters", 1337.10, 35.42, 19.82 ]
+    //"movie-pos": [ "meters", 1337.10, 35.42, 19.82 ]
+    "movie-pos": ["movie-pos", [1337.10, 35.42, 19.82, -76.0]]
   }
 },
 
