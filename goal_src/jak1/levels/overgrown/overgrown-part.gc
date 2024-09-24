@@ -1039,7 +1039,7 @@ nav-enemy-default-event-handler
 ;;;;;;;;;;;;;;;;TIME OF DAY;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;       (let ((v1-13 (-> *game-info* current-continue level)))
 ;;        (when (= v1-13 'overgrown)
-;;            (format 0 "The value of v1-13 is: ~a~%" v1-13)  ;; Printing v1-13 
+;;            (format 0 "The value of v1-13 is: ~a~%" v1-13)  ;; Printing v1-13
 ;;            (set! (-> *time-of-day-proc* 0 hour) 12)
 ;;            (set! (-> *time-of-day-proc* 0 minute) 0)
 ;;            (set! (-> *time-of-day-proc* 0 second) 0)
