@@ -2643,10 +2643,11 @@
        :music-bank 'fishgame
        :ambient-sounds
        '()
-       :mood '*jungle-mood*
-       :mood-func 'update-mood-jungle
+       :mood '*finalboss-mood*
+       :mood-func 'update-mood-finalboss
        :ocean #f
        :sky #t
+       :sun-fade 1.0
        :continues
        '(
           (new 'static

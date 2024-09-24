@@ -376,6 +376,11 @@
       (with-profiler "ambients"
         (set! *weather-off* #f)
         (let ((v1-13 (-> *game-info* current-continue level)))
+          (when (= v1-13 'overgrown)
+            (set! (-> *time-of-day-proc* 0 hour) 12)
+            (set! (-> *time-of-day-proc* 0 minute) 0)
+            (set! (-> *time-of-day-proc* 0 second) 0)
+            (set! (-> *time-of-day-proc* 0 frame) 0))
           (dotimes (a0-8 (-> *level* length))
             (let ((a1-6 (-> *level* level a0-8)))
               (when (= (-> a1-6 status) 'active)
