@@ -3232,7 +3232,8 @@
     "bsphere": [ 1049.81, 2.40, -57.99, 10 ], // bounding sphere
     "lump": {
       "name": "overgrown-fuel-cell-01",
-      "eco-info": [ "int32", 6, 118 ]
+      "eco-info": [ "int32", 6, 118 ],
+      "movie-pos": ["movie-pos", [1049.81, 2.40, -57.99, 1.255]]
     }
   },
   {
@@ -3391,6 +3392,17 @@
   }
 },
 
+{
+  "trans": [ 1798.0, 99.32, -113.7 ], // translation
+  "etype": "eco-blue", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ 1798.0, 94.32, -113.7, 10 ], // bounding sphere
+  "lump": {
+    "name": "overgrown-eco-blue2"
+  }
+},
+
 //////////////////////////////////TRAMPOLINE/////////////////////////////////
 
 {
@@ -3464,14 +3476,16 @@
     {
       "trans": [ 1798.0, 91.32, -113.7 ], // translation
       "etype": "plat-eco-return", // actor type
-      "game_task": "(game-task complete)", // associated game task (for powercells, etc)
+      "game_task": 1, // associated game task (for powercells, etc)
       "quat": [ 0, 0, 0, 1 ], // quaternion
       "bsphere": [ 1798.0, 91.32, -113.7, 10 ], // bounding sphere
       "lump": {
         "name": "overgrown-plat-3-return",
+        "notice-dist":["meters", 2.5],
         "path": [
           "vector4m",
           [1798.0, 91.32, -113.7, 1.0],
+          [1798.0, 90.32, -113.7, 1.0],
           [1794.92, 84.91, -90.51, 1.0],
           [1788.49, 77.82, -64.7, 1.0],
           [1765.1, 74.96, -49.28, 1.0],
@@ -3506,8 +3520,9 @@
         13.0, 14.0,
         15.0, 16.0,
         17.0, 18.0, 
-        20.0, 19.0,
-        21.0, 20.0],
+        19.0, 21.0, 
+        20.0, 22.0, 
+        21.0],
     "sync": ["float", 20.000, 0.0]
       }
     },
