@@ -1044,3 +1044,74 @@ nav-enemy-default-event-handler
 ;;            (set! (-> *time-of-day-proc* 0 minute) 0)
 ;;            (set! (-> *time-of-day-proc* 0 second) 0)
 ;;            (set! (-> *time-of-day-proc* 0 frame) 0)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;; RETURN PLAT ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(deftype plat-eco-return (plat-eco)
+  ((force-dest float)
+   (targ-dest  float)
+   (dest       float)
+   (speed      float)
+   (touch-time time-frame)))
+
+(defmethod get-unlit-skel ((this plat-eco-return))
+  *plat-eco-finalboss-unlit-sg*)
+
+(defmethod get-lit-skel ((this plat-eco-return))
+  *plat-eco-finalboss-lit-sg*)
+
+(defmethod baseplat-method-26 ((this plat-eco-return))
+  (set! (-> this force-dest) 0.0)
+  (set! (-> this targ-dest) 0.0)
+  (set! (-> this dest) 0.0)
+  (set! (-> this speed) 0.04)
+  (logclear! (-> this mask) (process-mask actor-pause))
+  (process-entity-status! this (entity-perm-status bit-3) #t)
+  (none))
+
+(defstate plat-path-active (plat-eco-return)
+  :virtual #t
+  :event
+    (behavior ((proc process) (argc int) (message symbol) (block event-message-block))
+      (case message
+        (('target)
+         (process-entity-status! self (entity-perm-status complete) #t)
+         (set! (-> self force-dest) (the-as float (-> block param 0))))
+        (('ridden 'edge-grabbed)
+         (if (time-elapsed? (-> self touch-time) (seconds 2))
+           (set! (-> self targ-dest)
+                 (cond
+                   ((= (-> self path-pos) 0.0) (set! (-> self force-dest) -1.0) 0.99)
+                   ((= (-> self path-pos) 0.99) 0.0)
+                   (else (-> self targ-dest)))))
+         (set-time! (-> self touch-time))
+         #f)
+        (else (plat-event proc argc message block))))
+  :enter
+    (behavior ((arg0 plat))
+      (set-time! (-> self state-time))
+      (lods-assign! (-> self draw) (-> self lit-look))
+      (process-entity-status! self (entity-perm-status complete) #t)
+      (cond
+        (arg0)
+        (else (dotimes (gp-1 5) (spawn-projectile-blue *target*)))))
+  :trans
+    (behavior ()
+      (let ((s5-0 (eval-path-curve! (-> self path) (new 'stack-no-clear 'vector) 0.0 'interp))
+            (gp-0 (eval-path-curve! (-> self path) (new 'stack-no-clear 'vector) 1.0 'interp)))
+        (if (time-elapsed? (-> self touch-time) (seconds 3)) (set! (-> self targ-dest) -1.0))
+        (set! (-> self dest)
+              (cond
+                ((>= (-> self force-dest) 0.0) (-> self force-dest))
+                ((>= (-> self targ-dest) 0.0) (-> self targ-dest))
+                ((< (vector-vector-xz-distance (target-pos 0) s5-0) (vector-vector-xz-distance (target-pos 0) gp-0)) 0.0)
+                (else 0.99))))
+      (if (= (-> self state-time) (current-time)) (set! (-> self path-pos) (-> self dest)))
+      (seek! (-> self path-pos) (-> self dest) (* (-> self speed) (seconds-per-frame)))
+      (eval-path-curve! (-> self path) (-> self basetrans) (-> self path-pos) 'interp)
+      (if (< (vector-vector-distance (-> self root trans) (ear-trans)) 81920.0)
+        (sound-play "eco-plat-hover" :id (-> self sound-id) :position (the-as symbol (-> self root trans))))
+      (plat-trans)
+      (when (send-event *target* 'query 'powerup (pickup-type eco-yellow))
+        (process-entity-status! self (entity-perm-status complete) #t)
+        (set! (-> self force-dest) 0.0))))

@@ -61,7 +61,7 @@
   // All art groups you want to use in your custom level. Will add their models and corresponding textures to the FR3 file.
   // Note: You will still have to add them to your level's .gd file.
    "art_groups": ["plat-ag", "water-anim-jungle-ag", "water-anim-sunken-ag", "jng-iris-door-ag", "bounceytarp-ag", "orb-cache-top-ag","plat-eco-ag","muse-ag", "hopper-ag","junglesnake-ag","junglefish-ag", "aphid-lurker-ag", "kermit-ag", "basebutton-ag",
-    "lurkercrab-ag", "lurkerpuppy-ag", "babak-ag", "warp-gate-switch-ag", "warp-gate-ag", "plat-button-ag","generic-button-ag", "trainingcam-ag"],
+    "lurkercrab-ag", "lurkerpuppy-ag", "babak-ag", "warp-gate-switch-ag", "warp-gate-ag", "plat-button-ag","generic-button-ag", "trainingcam-ag", "plat-eco-finalboss-ag"],
 
   // If you have any custom models in the "custom_assets/jak1/models/custom_levels" folder that you want to use in your level, add them to this list.
   // Note: Like with art groups, these should also be added to your level's .gd file.
@@ -3460,6 +3460,57 @@
       }
     },
 
+    {
+      "trans": [ 1798.0, 91.32, -113.7 ], // translation
+      "etype": "plat-eco-return", // actor type
+      "game_task": "(game-task complete)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1798.0, 91.32, -113.7, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-plat-3-return",
+        "path": [
+          "vector4m",
+          [1798.0, 91.32, -113.7, 1.0],
+          [1794.92, 84.91, -90.51, 1.0],
+          [1788.49, 77.82, -64.7, 1.0],
+          [1765.1, 74.96, -49.28, 1.0],
+          [1738.48, 75.37, -47.59, 1.0],
+          [1705.9, 73.95, -46.88, 1.0],
+          [1683.2, 59.53, -45.92, 1.0],
+          [1658.85, 52.38, -46.04, 1.0],
+          [1630.64, 51.96, -44.86, 1.0],
+          [1603.59, 51.26, -43.01, 1.0],
+          [1597.05, 50.55, -11.9, 1.0],
+          [1594.03, 52.82, 16.65, 1.0],
+          [1580.93, 54.17, 58.29, 1.0],
+          [1538.93, 53.11, 76.35, 1.0],
+          [1503.73, 52.26, 84.76, 1.0],
+          [1462.8, 52.12, 89.69, 1.0],
+          [1434.99, 53.55, 73.76, 1.0],
+          [1425.01, 50.98, 48.83, 1.0],
+          [1425.87, 52.0, 14.52, 1.0],
+          [1413.82, 50.23, -7.55, 1.0],
+          [1389.46, 48.72, -5.78, 1.0],
+          [1370.75, 53.56, -14.85, 1.0]
+        ],
+      "path-k": ["float", // Controls the curve for the paths - optional. Float array. first 4 need to be the same, last value = 4th to last
+        0.0, 0.0, 
+        0.0, 0.0,
+        1.0, 2.0, 
+        3.0, 4.0, 
+        5.0, 6.0,
+        7.0, 8.0,
+        9.0, 10.0, 
+        11.0, 12.0, 
+        13.0, 14.0,
+        15.0, 16.0,
+        17.0, 18.0, 
+        20.0, 19.0,
+        21.0, 20.0],
+    "sync": ["float", 20.000, 0.0]
+      }
+    },
+
     /////////////////////////////////////////////////////////ENEMIES/////////////////////////////////////////////////
     {
       "aid": 50500,
@@ -3642,8 +3693,8 @@
           //[ -530.87, 100.70, 144.45, 1.0 ]
         ],
         "nav-mesh-sphere": ["vector4m",
-        [1067.72, 0.55, 24.28, 5],
-        [1162.27, 1.21, -21.71, 5]]
+        [1067.72, 0.55, 24.28, 3],
+        [1162.27, 1.21, -21.71, 3]]
 
       }
     },
@@ -3811,9 +3862,9 @@
           //[ -530.87, 100.70, 144.45, 1.0 ]
         ],
       "nav-mesh-sphere": ["vector4m",
-        [1272.62, 34.68, -2.28, 5.0],
-        [1334.56, 35.38, 7.36, 5.0],
-        [1295.91, 23.62, -35.33, 5.0]]
+        [1272.62, 34.68, -2.28, 3.0],
+        [1334.56, 35.38, 7.36, 3.0],
+        [1295.91, 23.62, -35.33, 3.0]]
 
       }
     },
@@ -3901,11 +3952,12 @@
           [1388.64, 48.37, 105.49, 12.42],
           [1405.62, 48.37, 132.69, 16.82],
           [1455.28, 48.37, 121.99, 15.97],
-          [1417.38, 47.14, 32.3, 5.0],
-          [1417.7, 48.66, 94.74, 5.0],
-          [1486.86, 50.65, 118.16, 5.0],
-          [1587.56, 46.47, 81.18, 5.0],
-          [1654.51, 47.52, 64.56, 5.0]]
+          [1417.38, 47.14, 32.3, 2.0],
+          [1417.7, 48.66, 93.74, 3.0],
+          [1486.86, 50.65, 118.16, 2.0],
+          [1587.56, 46.47, 81.18, 2.0],
+          [1654.51, 47.52, 64.56, 2.0],
+          [1621.3, 46.72, -25.46, 3.0]]
       }
     },
     {

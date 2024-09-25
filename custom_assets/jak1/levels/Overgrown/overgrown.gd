@@ -24,6 +24,8 @@
   "kermit.o"
   "lurkercrab.o"
   "lurkerpuppy.o"
+  "sage-finalboss.o"
+  "plat-eco-finalboss-ag.go"
   "trainingcam-ag.go"
   "lurkercrab-ag.go"
   "plat-button-ag.go"
