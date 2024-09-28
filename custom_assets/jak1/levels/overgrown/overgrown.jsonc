@@ -1,0 +1,4514 @@
+{
+  // The "in-game" name of the level. Should be lower case, with dashes (GOAL symbol name)
+  // the name of this file, and the folder this file is in must have the same name.
+  "long_name": "overgrown",
+  // The file name, should be upper case and 8 characters or less.
+  "iso_name": "OVERGROWN",
+  // The nickname, should be exactly 3 characters
+  "nickname": "ovg", // 3 char name, all lowercase
+  // Background mesh file.
+  // Must have vertex colors. Use the blender cycles renderer, bake, diffuse, uncheck color,
+  // and bake to vertex colors. For now, only the first vertex color group is used, so make sure you
+  // only have 1.
+  "gltf_file": "custom_assets/jak1/levels/overgrown/overgrown.glb",
+
+  // automatically set wall vs. ground based on angle. Useful if you don't want to assign this yourself
+  "automatic_wall_detection": true,
+  "automatic_wall_angle": 45.0,
+
+  // if your mesh has triangles with incorrect orientation, set this to make all collision mesh triangles double sided
+  // this makes collision 2x slower and bigger, so only use if really needed
+  "double_sided_collide": false,
+
+  // available res-lump tag types:
+  // integer types: int32, uint32, enum-int32, enum-uint32
+  // float types: float, meters (1 meter = 4096.0 units), degrees (65536.0 = 360°)
+  // vector types: vector (normal floats), vector4m (meters), vector3m (meters with w set to 1.0), vector-vol (normal floats with w in meters), movie-pos (meters with w in degrees)
+  // special types: symbol, type, string, eco-info, cell-info, buzzer-info, water-height
+  //
+  // examples:
+  //
+  // adds a float tag 'spring-height' with value of 200 meters (1 meter = 4096.0 units):
+  // "spring-height": ["meters", 200.0]
+  //
+  // adds a degrees tag 'rotoffset':
+  // "rotoffset": ["degrees", -45.0]
+  //
+  // adds a movie-pos tag:
+  // "movie-pos": ["movie-pos", [100.22, -25.3, 99.5, 180.0]]
+  //
+  // adds an enum tag 'options':
+  // "options": ["enum-int32", "(fact-options large)"]
+  //
+  // adds a water-height tag:
+  // "water-height": ["water-height", 25.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"]
+  //
+  // adds an eco-info tag:
+  // "eco-info": ["eco-info", "(pickup-type health)", 2]
+  //
+  // adds a cell-info tag:
+  // "eco-info": ["cell-info", "(game-task training-gimmie)"]
+  //
+  // adds a buzzer-info tag:
+  // "eco-info": ["buzzer-info", "(game-task training-buzzer)", 5]
+  //
+  // adds a 'symbol' tag (using the 'type' and 'string' lump types works the same way):
+  // "symbol-list": ["symbol", "sym-1", "sym-2"]
+
+  // The base actor id for your custom level. If you have multiple levels, this should be unique!
+  "base_id": 50000,
+
+  // All art groups you want to use in your custom level. Will add their models and corresponding textures to the FR3 file.
+  // Note: You will still have to add them to your level's .gd file.
+   "art_groups": ["plat-ag", "water-anim-jungle-ag", "water-anim-sunken-ag", "jng-iris-door-ag", "bounceytarp-ag", "orb-cache-top-ag","plat-eco-ag","muse-ag", "hopper-ag","junglesnake-ag","junglefish-ag", "aphid-lurker-ag", "kermit-ag", "basebutton-ag",
+    "lurkercrab-ag", "lurkerpuppy-ag", "babak-ag", "warp-gate-switch-ag", "warp-gate-ag", "plat-button-ag","generic-button-ag", "trainingcam-ag", "plat-eco-finalboss-ag"],
+
+  // If you have any custom models in the "custom_assets/jak1/models/custom_levels" folder that you want to use in your level, add them to this list.
+  // Note: Like with art groups, these should also be added to your level's .gd file.
+  "custom_models": ["test-actor"],
+
+  // Any textures you want to include in your custom level. This is mainly useful for things such as the zoomer HUD,
+  // which is not in the common level files and has no art group associated with it.
+  // To get a list of all the textures, you can extract all of the game's textures
+  // by setting "save_texture_pngs" to true in the decompiler config.
+  "textures": [
+    // all textures required for the zoomer HUD
+    // "zoomerhud",
+    // "zoomerhud-dial",
+    // "zoomerhud-main-02",
+    // "zoomerhud-main-03",
+    // "zoomerhud-pieslice",
+    // "zoomerhud-heatbg-01",
+    // "zoomerhud-main-03arrow",
+    // "zoomerhud-main-03knob"
+  ],
+
+  // Ambients you want to use in your custom level. Ambients can be used for various things like changing the music variation (flava),
+  // adding ambient sounds, level name hints, etc.
+  "ambients": [
+    {
+      "trans": [ 1029.72, 0.19, -5.26, 50.0 ], // translation
+      "bsphere": [ 1029.72, 0.19, -5.26, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown1",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1065.12, 0.50, 20.75, 50.0 ], // translation
+      "bsphere": [ 1065.12, 0.50, 20.75, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown2",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1129.63, 16.58, 37.45, 50.0 ], // translation
+      "bsphere": [ 1129.63, 16.58, 37.45, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown3",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1159.86, 1.18, -19.65, 50.0 ], // translation
+      "bsphere": [ 1159.86, 1.18, -19.65, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown4",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1198.80, 38.72, 17.77, 50.0 ], // translation
+      "bsphere": [ 1198.80, 38.72, 17.77, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown5",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1271.16, 34.90, -0.84, 50.0 ], // translation
+      "bsphere": [ 1271.16, 34.90, -0.84, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown6",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1331.59, 35.41, 8.14, 50.0 ], // translation
+      "bsphere": [ 1331.59, 35.41, 8.14, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown7",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1296.21, 23.65, -33.40, 50.0 ], // translation
+      "bsphere": [ 1296.21, 23.65, -33.40, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown8",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1360.87, 50.67, -38.46, 50.0 ], // translation
+      "bsphere": [ 1360.87, 50.67, -38.46, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown9",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1415.84, 46.83, 32.50, 50.0 ], // translation
+      "bsphere": [ 1415.84, 46.83, 32.50, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown10",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1416.43, 48.67, 90.81, 50.0 ], // translation
+      "bsphere": [ 1416.43, 48.67, 90.81, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown11",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1406.61, 62.32, 138.19, 50.0 ], // translation
+      "bsphere": [ 1406.61, 62.32, 138.19, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown12",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1453.59, 61.61, 116.09, 50.0 ], // translation
+      "bsphere": [ 1453.59, 61.61, 116.09, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown13",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1484.54, 51.12, 117.47, 50.0 ], // translation
+      "bsphere": [ 1484.54, 51.12, 117.47, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown14",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1586.47, 46.63, 82.78, 50.0 ], // translation
+      "bsphere": [ 1586.47, 46.63, 82.78, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown15",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1651.77, 47.37, 65.70, 50.0 ], // translation
+      "bsphere": [ 1651.77, 47.37, 65.70, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown16",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1622.33, 46.52, -22.69, 50.0 ], // translation
+      "bsphere": [ 1622.33, 46.52, -22.69, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown17",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1780.83, 70.00, -99.31, 50.0 ], // translation
+      "bsphere": [ 1780.83, 70.00, -99.31, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown18",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1810.12, 69.76, -107.77, 50.0 ], // translation
+      "bsphere": [ 1810.12, 69.76, -107.77, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-chirp-overgrown19",
+        "type": "'sound",
+        "effect-name": "'bird-4",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1698.96, 44.64, -44.20, 50.0 ], // translation
+      "bsphere": [ 1698.96, 44.64, -44.20, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-river-overgrown1",
+        "type": "'sound",
+        "effect-name": "'jungle-river",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1343.52, 20.81, -6.69, 50.0 ], // translation
+      "bsphere": [ 1343.52, 20.81, -6.69, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-river-overgrown2",
+        "type": "'sound",
+        "effect-name": "'jungle-river",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1186.32, 3.97, 0.57, 50.0 ], // translation
+      "bsphere": [ 1186.32, 3.97, 0.57, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-river-overgrown3",
+        "type": "'sound",
+        "effect-name": "'jungle-river",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+      "trans": [ 1175.04, -1.81, 0.76, 50.0 ], // translation
+      "bsphere": [ 1175.04, -1.81, 0.76, 50.0 ], // bounding sphere
+      "lump": {
+        "name": "ambient-river-overgrown4",
+        "type": "'sound",
+        "effect-name": "'jungle-river",
+        "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+        "cycle-speed": [ "float", -1.0, 0.0 ]
+      }
+    },
+    {
+  "trans": [ 1054.25, -0.98, -5.46, 50.0 ], // translation
+  "bsphere": [ 1054.25, -0.98, -5.46, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown1",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1091.68, -0.74, 24.31, 50.0 ], // translation
+  "bsphere": [ 1091.68, -0.74, 24.31, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown2",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1124.21, -1.01, -2.76, 50.0 ], // translation
+  "bsphere": [ 1124.21, -1.01, -2.76, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown3",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1157.48, -0.77, -2.63, 50.0 ], // translation
+  "bsphere": [ 1157.48, -0.77, -2.63, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown4",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1211.09, 20.90, -1.24, 50.0 ], // translation
+  "bsphere": [ 1211.09, 20.90, -1.24, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown5",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1253.05, 21.14, -6.74, 50.0 ], // translation
+  "bsphere": [ 1253.05, 21.14, -6.74, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown6",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1301.73, 20.73, -4.67, 50.0 ], // translation
+  "bsphere": [ 1301.73, 20.73, -4.67, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown7",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1393.01, 44.64, -6.07, 50.0 ], // translation
+  "bsphere": [ 1393.01, 44.64, -6.07, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown8",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1427.82, 44.90, 23.36, 50.0 ], // translation
+  "bsphere": [ 1427.82, 44.90, 23.36, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown9",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1456.88, 44.65, 77.84, 50.0 ], // translation
+  "bsphere": [ 1456.88, 44.65, 77.84, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown10",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1516.36, 44.17, 104.37, 50.0 ], // translation
+  "bsphere": [ 1516.36, 44.17, 104.37, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown11",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1581.87, 44.63, 66.37, 50.0 ], // translation
+  "bsphere": [ 1581.87, 44.63, 66.37, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown12",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1597.72, 44.74, -16.06, 50.0 ], // translation
+  "bsphere": [ 1597.72, 44.74, -16.06, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown13",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1656.84, 44.64, -42.77, 50.0 ], // translation
+  "bsphere": [ 1656.84, 44.64, -42.77, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown14",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1734.60, 67.70, -45.37, 50.0 ], // translation
+  "bsphere": [ 1734.60, 67.70, -45.37, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown15",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1784.73, 67.91, -54.56, 50.0 ], // translation
+  "bsphere": [ 1784.73, 67.91, -54.56, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown16",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1790.65, 67.34, -93.87, 50.0 ], // translation
+  "bsphere": [ 1790.65, 67.34, -93.87, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown17",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1770.09, 67.53, -139.93, 50.0 ], // translation
+  "bsphere": [ 1770.09, 67.53, -139.93, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown18",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+},
+{
+  "trans": [ 1810.97, 67.36, -143.64, 50.0 ], // translation
+  "bsphere": [ 1810.97, 67.36, -143.64, 50.0 ], // bounding sphere
+  "lump": {
+    "name": "ambient-shores-overgrown19",
+    "type": "'sound",
+    "effect-name": "'jungle-shores",
+    "effect-param": [ "float", 11.0, 30.0, 12.0, 50.0 ], // ??, ??, ??, Max Radius
+    "cycle-speed": [ "float", -1.0, 0.0 ]
+  }
+}
+    
+
+  ],
+
+  "actors" : [
+        ////////////////////////////////////////////////////////////////////////// AMBIENT ACTORS START POINT ///////////////////////////////////////////
+        {
+          "trans": [ 1047.86, 0.04, 10.59 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1047.86, 0.04, 10.59, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies1",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1092.14, 7.53, -6.12 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1092.14, 7.53, -6.12, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies2",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1119.65, 15.31, 41.98 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1119.65, 15.31, 41.98, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies3",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1130.81, 0.05, 11.47 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1130.81, 0.05, 11.47, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies4",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1139.37, 0.87, -20.58 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1139.37, 0.87, -20.58, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies5",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1198.22, 23.58, -20.08 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1198.22, 23.58, -20.08, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies6",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1243.67, 27.29, -21.68 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1243.67, 27.29, -21.68, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies7",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1230.84, 35.92, 23.42 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1230.84, 35.92, 23.42, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies8",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1309.53, 34.23, 12.50 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1309.53, 34.23, 12.50, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies9",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1318.31, 22.59, -24.52 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1318.31, 22.59, -24.52, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies10",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1283.18, 46.34, -48.61 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1283.18, 46.34, -48.61, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies11",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1372.47, 56.16, -25.31 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1372.47, 56.16, -25.31, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies12",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1399.58, 52.10, 53.02 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1399.58, 52.10, 53.02, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies13",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1388.91, 60.08, 106.56 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1388.91, 60.08, 106.56, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies14",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1453.88, 62.09, 128.87 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1453.88, 62.09, 128.87, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies15",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1526.25, 70.24, 169.14 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1526.25, 70.24, 169.14, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies16",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1598.48, 59.76, 114.75 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1598.48, 59.76, 114.75, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies17",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1625.19, 48.38, 58.92 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1625.19, 48.38, 58.92, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies18",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1574.76, 46.12, 105.76 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1574.76, 46.12, 105.76, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies19",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1477.29, 52.40, 152.57 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1477.29, 52.40, 152.57, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies20",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1426.78, 47.17, 115.29 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1426.78, 47.17, 115.29, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies21",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1401.41, 47.17, 79.69 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1401.41, 47.17, 79.69, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies22",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1684.50, 47.94, -43.11 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1684.50, 47.94, -43.11, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies23",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1771.25, 69.49, -55.25 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1771.25, 69.49, -55.25, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies24",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1803.94, 69.65, -84.88 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1803.94, 69.65, -84.88, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies25",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1805.75, 86.11, -126.57 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1805.75, 86.11, -126.57, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies26",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+        {
+          "trans": [ 1775.19, 93.65, -126.17 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1775.19, 93.65, -126.17, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies27",
+            "art-name": "group-village1-butterflies"
+          }
+        },
+
+        {
+          "trans": [ 1652.32, 48.22, 10.01 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1652.32, 48.22, 10.01, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterflies28",
+            "art-name": "group-village1-butterflies"
+          }
+        },        
+
+        {
+          "trans": [ 1045.95, 0.08, 9.86 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1045.95, 0.08, 9.86, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting1",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1090.18, 7.23, -1.58 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1090.18, 7.23, -1.58, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting2",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1091.56, 13.43, 31.43 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1091.56, 13.43, 31.43, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting3",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1127.64, 16.01, 35.65 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1127.64, 16.01, 35.65, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting4",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1138.68, 0.84, -8.58 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1138.68, 0.84, -8.58, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting5",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1161.60, 0.71, -5.09 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1161.60, 0.71, -5.09, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting6",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1178.46, 6.96, -2.43 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1178.46, 6.96, -2.43, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting7",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1193.91, 19.16, -18.50 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1193.91, 19.16, -18.50, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting8",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1241.73, 26.80, -18.97 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1241.73, 26.80, -18.97, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting9",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1247.14, 27.19, -23.63 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1247.14, 27.19, -23.63, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting10",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1261.79, 33.56, -39.33 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1261.79, 33.56, -39.33, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting11",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1254.78, 34.38, 8.10 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1254.78, 34.38, 8.10, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting12",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1310.97, 34.21, 14.07 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1310.97, 34.21, 14.07, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting13",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1314.63, 22.70, -21.08 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1314.63, 22.70, -21.08, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting14",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1343.73, 42.30, -32.54 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1343.73, 42.30, -32.54, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting15",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1397.21, 61.19, -17.97 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1397.21, 61.19, -17.97, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting16",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1404.10, 51.80, 53.69 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1404.10, 51.80, 53.69, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting17",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1431.33, 51.07, 54.66 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1431.33, 51.07, 54.66, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting18",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1397.84, 47.36, 89.47 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1397.84, 47.36, 89.47, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting19",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1442.73, 48.07, 111.22 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1442.73, 48.07, 111.22, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting20",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1462.51, 52.92, 145.48 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1462.51, 52.92, 145.48, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting21",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1506.02, 65.44, 132.27 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1506.02, 65.44, 132.27, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting22",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1614.54, 53.04, 87.22 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1614.54, 53.04, 87.22, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting23",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1687.97, 46.78, -27.62 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1687.97, 46.78, -27.62, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting24",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1799.54, 69.18, -88.17 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1799.54, 69.18, -88.17, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting25",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },
+        {
+          "trans": [ 1766.69, 94.13, -124.29 ], // translation
+          "etype": "villagea-part", // actor type
+          "game_task": 0, // associated game task (for powercells, etc)
+          "quat": [ 0, -0.425, 0, 0.905 ], // quaternion
+          "bsphere": [ 1766.69, 94.13, -124.29, 50 ], // bounding sphere
+          "lump": {
+            "name": "overgrownbutterfliessitting26",
+            "art-name": "group-village1-butterfly-sitting"
+          }
+        },        
+        ////////////////////////////////////////////////////////////////////////// IRIS DOOR START POINT ///////////////////////////////////////////
+    {
+      "trans": [ 1050.54, 3.00, -40.82],
+      "etype": "overgrown-iris-door",
+      "game_task": 0,
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ],
+      "bsphere": [ 1100.0, 0.0, 0.0, 10 ],
+      "lump": {
+        "name": "overgrown-irisdoor",
+        "scale": [ "float", 1.7],
+        "state-actor": [ "uint32", 52000 ]
+      }
+    },
+
+          ////////////////////////////////////////////////////////////////////////// WATER / WATERFALLS / WATER VOLS START POINT ///////////////////////////////////////////
+    {
+      "trans": [ 1085.0, -0.18, 0.0 ],
+      "etype": "jungle-water",
+      "game_task": 0,
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ],
+      "bsphere": [ 1100.0, 0.0, 0.0, 10 ],
+      "lump": {
+        "name": "WaterShape-34",
+        "look": [ "int32", 34 ],
+        "scale": [ "float", 3.0 ]
+      }
+    },
+
+    {
+      "trans": [1190.0, 6.5, 0.7],
+      "etype": "jungle-water",
+      "game_task": 0,
+      "quat" : [0.0, 0.0, -0.0, 1.0],
+      "bsphere": [-39.02, -0.08, -13.37, 10],
+      "lump": {
+        "name":"WaterShape-08",
+        "scale": ["float", 0.3],
+        "look": ["int32", 8]
+      }
+    },
+
+    {
+      "trans": [1272.72, 21.50, -14.56],
+      "etype": "jungle-water",
+      "game_task": 0,
+      "quat" : [0.0, 0.0, -0.0, 1.0],
+      "bsphere": [-39.02, -0.08, -13.37, 10],
+      "lump": {
+        "name":"WaterShape-08-secondarea",
+        "scale": ["float", 3.0],
+        "look": ["int32", 3]
+      }
+    },
+
+    {
+      "trans": [1624.72, 45.428, 15.66],
+      "etype": "jungle-water",
+      "game_task": 0,
+      "quat" : [0.0, 0.0, -0.0, 1.0],
+      "bsphere": [-39.02, -0.08, -13.37, 10],
+      "lump": {
+        "name":"WaterShape-08-thirdarea",
+        "scale": ["float", 11.0],
+        "look": ["int32", 3]
+      }
+    },
+
+    {
+      "trans": [1900.72, 68.528, -101.45],
+      "etype": "jungle-water",
+      "game_task": 0,
+      "quat" : [0.0, 0.0, -0.0, 1.0],
+      "bsphere": [-39.02, -0.08, -13.37, 10],
+      "lump": {
+        "name":"WaterShape-08-finalarea",
+        "scale": ["float", 8.0],
+        "look": ["int32", 3]
+      }
+    },
+
+    {
+      "trans": [ 1173.42, -43.607, -5.16 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ -1169.40, 354.28, 194.49, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-01",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [ 1173.42, -43.607, 7.5 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ -1169.40, 354.28, 194.49, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-02",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [ 1182.42, -35.607, 1.0 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ -1169.40, 354.28, 194.49, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-03",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [ 1352.14, -2.00, -3.2 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ 1344.14, 0.84, -7.19, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-04",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [ 1343.14, -15.00, -3.2 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ 1344.14, 0.84, -7.19, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-05",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [ 1352.14, -2.00, -6.2 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ 1344.14, 0.84, -7.19, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-06",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [ 1343.14, -15.00, -6.2 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ 1344.14, 0.84, -7.19, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-07",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [ 1352.14, -2.00, -9.2 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ 1344.14, 0.84, -7.19, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-08",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [ 1343.14, -15.00, -9.2 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ 1344.14, 0.84, -7.19, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-09",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [ 1352.14, -2.00, -13.2 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ 1344.14, 0.84, -7.19, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-10",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [ 1343.14, -15.00, -12.2 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ 1344.14, 0.84, -7.19, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-11",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [ 1699.67, 21.65, -43.03 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ 1344.14, 0.84, -7.19, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-12",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [ 1699.67, 21.65, -46.03 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ 1344.14, 0.84, -7.19, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-13",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+      "trans": [ 1699.67, 21.65, -49.03 ], // translation -1196.41 354.36 178.98
+      "etype": "overgrown-part", // actor type
+      "game_task": 0, // associated game task (for powercells, etc)
+      "quat": [ 0.0, -0.0, -0.0, 0.0 ], // quaternion
+      "bsphere": [ 1344.14, 0.84, -7.19, 50 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-waterfall-14",
+        "effect-name": "'waterfall",
+        "art-name": "group-overgrown-waterfall-1",
+        "effect-param": [ "float", 11.0, 40.0, 12.0, 80.0 ], // ??, ??, ??, ??
+        "cycle-speed": [ "float", -1.0, 0.0 ],
+        "vis-dist": [ "meters", 200.0 ]
+      }
+    },
+
+    {
+    "trans": [ 1085.0, 0.18, -6.0 ], // translation needs to also sit on top of water volume plane
+    "etype": "water-anim", // actor type
+    "game_task": 0, // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1085.0, 0.18, 0.0, 200.0 ], // bounding sphere
+    "lump": {
+      "vol": ["vector-vol",
+    [0.000, -1.000, -0.000, 8.640],
+    [0.993, -0.120, -0.000, 1206.332],
+    [-0.993, 0.120, -0.000, -1002.765],
+    [0.000, 0.010, 1.000, 35.005],
+    [0.000, -0.010, -1.000, 83.621],
+    [0.000, 1.000, -0.000, -0.042]
+  ],
+
+      "name": "overgrown-stream-water-area1",
+      "water-height": [ "float", 0.0, 2048.0, 8192.0, 1048588.0 ], // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
+      "vis-dist": [ "meters", 200.0 ],
+      "look": [ "int32", 9 ]
+    }
+  },
+
+  {
+    "trans": [ 0.0, 6.5, 0.54 ], // translation needs to also sit on top of water volume plane
+    "etype": "water-anim", // actor type
+    "game_task": 0, // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1085.0, 0.18, 0.0, 200.0 ], // bounding sphere
+    "lump": {
+      "vol": ["vector-vol",
+    [0.000, 1.000, -0.000, 6.500],
+    [0.000, -1.000, -0.000, -3.351],
+    [1.000, -0.016, -0.000, 1192.166],
+    [-1.000, 0.016, -0.000, -1182.176],
+    [0.000, -0.007, -1.000, 9.016],
+    [0.000, 0.007, 1.000, 10.179]
+  ],
+
+      "name": "overgrown-stream-water-area1pt2",
+      "water-height": [ "float", 30816.0, 2048.0, 8192.0, 1048588.0 ], // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
+      "vis-dist": [ "meters", 200.0 ],
+      "look": [ "int32", 9 ]
+    }
+  },
+
+  {
+    "trans": [ 1272.72, 21.50, -54.56 ], // translation needs to also sit on top of water volume plane
+    "etype": "water-anim", // actor type
+    "game_task": 0, // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1272.72, 21.50, -14.56, 200.0 ], // bounding sphere
+    "lump": {
+      "vol": ["vector-vol",
+    [-1.000, 0.000, -0.000, -1198.699],
+    [0.000, 0.000, -1.000, 39.334],
+    [1.000, 0.000, -0.000, 1356.177],
+    [0.000, 0.000, 1.000, 33.895],
+    [0.000, -1.000, -0.000, -14.629],
+    [0.000, 1.000, -0.000, 21.50]
+  ],
+
+      "name": "overgrown-stream-water-area2",
+      "water-height": [ "float", 190265.088, 2048.0, 8192.0, 1048588.0 ], // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
+      "vis-dist": [ "meters", 200.0 ],
+      "look": [ "int32", 9 ]
+    }
+  },
+
+  {
+    "trans": [ 1624.72, 45.428, 15.66 ], // translation needs to also sit on top of water volume plane
+    "etype": "water-anim", // actor type
+    "game_task": 0, // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1624.72, 45.428, 15.66, 200.0 ], // bounding sphere
+    "lump": {
+      "vol": ["vector-vol",
+    [-1.000, 0.000, -0.000, -1361.542],
+    [0.000, 0.000, -1.000, 68.395],
+    [1.000, 0.000, -0.000, 1749.375],
+    [0.000, 0.000, 1.000, 112.768],
+    [0.000, -1.000, -0.000, -2.422],
+    [0.000, 1.000, -0.000, 45.428]
+  ],
+
+      "name": "overgrown-stream-water-area3",
+      "water-height": [ "float", 190265.088, 2048.0, 8192.0, 1048588.0 ], // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
+      "vis-dist": [ "meters", 200.0 ],
+      "look": [ "int32", 9 ]
+    }
+  },
+
+  {
+    "trans": [ 1900.72, 68.528, -101.45 ], // translation needs to also sit on top of water volume plane
+    "etype": "water-anim", // actor type
+    "game_task": 0, // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1900.72, 68.528, -101.45, 200.0 ], // bounding sphere
+    "lump": {
+      "vol": ["vector-vol",
+    [-1.000, 0.000, -0.000, -1709.887],
+    [0.000, 0.000, -1.000, 207.355],
+    [1.000, 0.000, -0.000, 1828.872],
+    [0.000, 0.000, 1.000, -36.706],
+    [0.000, -1.000, -0.000, -29.099],
+    [0.000, 1.000, -0.000, 68.528]
+  ],
+
+      "name": "overgrown-stream-water-final",
+      "water-height": [ "float", 284882.688, 2048.0, 8192.0, 1048588.0 ], // camera height (top of water volume plane + 4192), ?, wadledept, flags "water-height": ["water-height", 0.0, 0.5, 2.0, "(water-flags wt08 wt03 wt01)"],
+      "vis-dist": [ "meters", 200.0 ],
+      "look": [ "int32", 9 ]
+    }
+  },
+  ////////////////////////////////////////////////////////////////////////// WATER / WATERFALLS / WATER VOLS END POINT ///////////////////////////////////////////
+
+  ////////////////////////////////////////////////////////////////////////// MONEY START POINT ///////////////////////////////////////////
+  {
+    "trans": [ 1065.25, 2.39, -11.25 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1065.25, 2.39, -11.25, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-01"
+    }
+  },
+  {
+    "trans": [ 1079.31, 5.23, -10.84 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1079.31, 5.23, -10.84, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-02"
+    }
+  },
+  {
+    "trans": [ 1083.00, 6.87, -5.39 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1083.00, 6.87, -5.39, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-03"
+    }
+  },
+  {
+    "trans": [ 1096.06, 11.18, -1.56 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1096.06, 11.18, -1.56, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-04"
+    }
+  },
+  {
+    "trans": [ 1096.40, 13.87, 7.34 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1096.40, 13.87, 7.34, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-05"
+    }
+  },
+  {
+    "trans": [ 1096.45, 15.20, 14.61 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1096.45, 15.20, 14.61, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-06"
+    }
+  },
+  {
+    "trans": [ 1096.49, 16.71, 23.50 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1096.49, 16.71, 23.50, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-07"
+    }
+  },
+  {
+    "trans": [ 1101.95, 14.91, 34.89 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1101.95, 14.91, 34.89, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-08"
+    }
+  },
+  {
+    "trans": [ 1106.61, 20.34, 38.20 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1106.61, 20.34, 38.20, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-09"
+    }
+  },
+  {
+    "trans": [ 1113.34, 16.10, 41.09 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1113.34, 16.10, 41.09, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-10"
+    }
+  },
+  {
+    "trans": [ 1092.64, 3.02, 11.37 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1092.64, 3.02, 11.37, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-11"
+    }
+  },
+  {
+    "trans": [ 1103.56, 3.26, 5.73 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1103.56, 3.26, 5.73, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-12"
+    }
+  },
+  {
+    "trans": [ 1112.75, 3.01, -3.70 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1112.75, 3.01, -3.70, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-13"
+    }
+  },
+  {
+    "trans": [ 1121.47, 2.72, -12.73 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1121.47, 2.72, -12.73, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-14"
+    }
+  },
+  {
+    "trans": [ 1130.36, 2.99, -19.34 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1130.36, 2.99, -19.34, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-15"
+    }
+  },
+  {
+    "trans": [ 1141.16, 2.64, -3.03 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1141.16, 2.64, -3.03, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-16"
+    }
+  },
+  {
+    "trans": [ 1150.40, 2.07, 6.27 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1150.40, 2.07, 6.27, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-17"
+    }
+  },
+  {
+    "trans": [ 1162.74, 2.28, 15.16 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1162.74, 2.28, 15.16, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-18"
+    }
+  },
+  {
+    "trans": [ 1172.64, 0.19, 0.06 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1172.64, 0.19, 0.06, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-19"
+    }
+  },
+  {
+    "trans": [ 1175.65, 0.19, 5.62 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1175.65, 0.19, 5.62, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-20"
+    }
+  },
+  {
+    "trans": [ 1175.42, 0.19, -5.30 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1175.42, 0.19, -5.30, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-21"
+    }
+  },
+  {
+    "trans": [ 1177.13, 4.39, 22.93 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1177.13, 4.39, 22.93, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-22"
+    }
+  },
+  {
+    "trans": [ 1180.69, 6.92, 26.16 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1180.69, 6.92, 26.16, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-23"
+    }
+  },
+  {
+    "trans": [ 1182.05, 9.86, 17.31 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1182.05, 9.86, 17.31, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-24"
+    }
+  },
+  {
+    "trans": [ 1181.80, 9.33, 7.21 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1181.80, 9.33, 7.21, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-25"
+    }
+  },
+  {
+    "trans": [ 1179.92, 9.16, 1.22 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1179.92, 9.16, 1.22, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-26"
+    }
+  },
+  {
+    "trans": [ 1181.65, 9.79, -6.98 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1181.65, 9.79, -6.98, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-27"
+    }
+  },
+  {
+    "trans": [ 1182.29, 12.51, -16.75 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1182.29, 12.51, -16.75, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-28"
+    }
+  },
+  {
+    "trans": [ 1187.73, 16.80, -16.87 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1187.73, 16.80, -16.87, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-29"
+    }
+  },
+  {
+    "trans": [ 1193.15, 21.36, -20.34 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1193.15, 21.36, -20.34, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-30"
+    }
+  },
+  {
+    "trans": [ 1205.58, 25.36, -19.07 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1205.58, 25.36, -19.07, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-31"
+    }
+  },
+  {
+    "trans": [ 1217.67, 24.68, -17.20 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1217.67, 24.68, -17.20, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-32"
+    }
+  },
+  {
+    "trans": [ 1231.06, 24.60, -16.04 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1231.06, 24.60, -16.04, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-33"
+    }
+  },
+  {
+    "trans": [ 1241.85, 26.76, -13.66 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1241.85, 26.76, -13.66, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-34"
+    }
+  },
+  {
+    "trans": [ 1264.54, 28.54, -26.93 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1264.54, 28.54, -26.93, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-35"
+    }
+  },
+  {
+    "trans": [ 1262.27, 28.38, -31.69 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1262.27, 28.38, -31.69, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-36"
+    }
+  },
+  {
+    "trans": [ 1259.91, 27.93, -36.54 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1259.91, 27.93, -36.54, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-37"
+    }
+  },
+  {
+    "trans": [ 1245.88, 26.29, -3.35 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1245.88, 26.29, -3.35, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-38"
+    }
+  },
+  {
+    "trans": [ 1249.18, 29.77, 1.71 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1249.18, 29.77, 1.71, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-39"
+    }
+  },
+  {
+    "trans": [ 1256.05, 32.77, -0.15 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1256.05, 32.77, -0.15, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-40"
+    }
+  },
+  {
+    "trans": [ 1222.39, 37.97, 25.37 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1222.39, 37.97, 25.37, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-41"
+    }
+  },
+  {
+    "trans": [ 1233.46, 37.92, 22.91 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1233.46, 37.92, 22.91, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-42"
+    }
+  },
+  {
+    "trans": [ 1247.08, 37.87, 18.88 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1247.08, 37.87, 18.88, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-43"
+    }
+  },
+  {
+    "trans": [ 1272.83, 37.91, 9.33 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1272.83, 37.91, 9.33, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-44"
+    }
+  },
+  {
+    "trans": [ 1288.84, 36.52, 6.45 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1288.84, 36.52, 6.45, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-45"
+    }
+  },
+  {
+    "trans": [ 1302.45, 37.07, 13.24 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1302.45, 37.07, 13.24, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-46"
+    }
+  },
+  {
+    "trans": [ 1316.61, 36.06, 10.19 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1316.61, 36.06, 10.19, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-47"
+    }
+  },
+  {
+    "trans": [ 1328.72, 37.07, 15.31 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1328.72, 37.07, 15.31, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-48"
+    }
+  },
+  {
+    "trans": [ 1273.57, 39.80, -44.57 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1273.57, 39.80, -44.57, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-49"
+    }
+  },
+  {
+    "trans": [ 1282.47, 48.17, -47.99 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1282.47, 48.17, -47.99, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-50"
+    }
+  },
+  {
+    "trans": [ 1283.28, 48.65, -54.52 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1283.28, 48.65, -54.52, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-51"
+    }
+  },
+  {
+    "trans": [ 1289.31, 32.05, -7.79 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1289.31, 32.05, -7.79, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-52"
+    }
+  },
+  {
+    "trans": [ 1293.54, 29.09, -13.22 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1293.54, 29.09, -13.22, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-53"
+    }
+  },
+  {
+    "trans": [ 1302.09, 25.80, -10.25 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1302.09, 25.80, -10.25, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-54"
+    }
+  },
+  {
+    "trans": [ 1289.42, 24.90, -28.87 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1289.42, 24.90, -28.87, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-55"
+    }
+  },
+  {
+    "trans": [ 1300.38, 25.54, -24.82 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1300.38, 25.54, -24.82, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-56"
+    }
+  },
+  {
+    "trans": [ 1313.18, 24.85, -27.98 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1313.18, 24.85, -27.98, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-57"
+    }
+  },
+  {
+    "trans": [ 1324.35, 24.61, -22.96 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1324.35, 24.61, -22.96, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-58"
+    }
+  },
+  {
+    "trans": [ 1337.24, 25.01, -27.95 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1337.24, 25.01, -27.95, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-59"
+    }
+  },
+  {
+    "trans": [ 1343.89, 34.08, -28.59 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1343.89, 34.08, -28.59, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-60"
+    }
+  },
+  {
+    "trans": [ 1347.75, 45.15, -32.00 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1347.75, 45.15, -32.00, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-61"
+    }
+  },
+  {
+    "trans": [ 1361.64, 52.57, -33.13 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1361.64, 52.57, -33.13, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-62"
+    }
+  },
+  {
+    "trans": [ 1363.53, 58.34, -31.81 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1363.53, 58.34, -31.81, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-63"
+    }
+  },
+  {
+    "trans": [ 1369.13, 57.51, -27.48 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1369.13, 57.51, -27.48, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-64"
+    }
+  },
+  {
+    "trans": [ 1393.38, 64.00, -8.06 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1393.38, 64.00, -8.06, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-65"
+    }
+  },
+  {
+    "trans": [ 1393.57, 61.86, 0.61 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1393.57, 61.86, 0.61, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-66"
+    }
+  },
+  {
+    "trans": [ 1394.45, 59.09, 12.84 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1394.45, 59.09, 12.84, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-67"
+    }
+  },
+  {
+    "trans": [ 1393.17, 51.22, 28.55 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1393.17, 51.22, 28.55, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-68"
+    }
+  },
+  {
+    "trans": [ 1399.28, 50.01, 36.10 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1399.28, 50.01, 36.10, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-69"
+    }
+  },
+  {
+    "trans": [ 1398.75, 49.90, 44.51 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1398.75, 49.90, 44.51, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-70"
+    }
+  },
+  {
+    "trans": [ 1396.23, 55.66, 60.97 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1396.23, 55.66, 60.97, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-71"
+    }
+  },
+  {
+    "trans": [ 1391.04, 57.58, 67.73 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1391.04, 57.58, 67.73, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-72"
+    }
+  },
+  {
+    "trans": [ 1384.81, 59.98, 76.33 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1384.81, 59.98, 76.33, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-73"
+    }
+  },
+  {
+    "trans": [ 1382.72, 60.80, 89.06 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1382.72, 60.80, 89.06, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-74"
+    }
+  },
+  {
+    "trans": [ 1384.70, 66.34, 95.56 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1384.70, 66.34, 95.56, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-75"
+    }
+  },
+  {
+    "trans": [ 1386.21, 62.15, 101.88 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1386.21, 62.15, 101.88, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-76"
+    }
+  },
+
+  {
+    "trans": [ 1391.78, 62.58, 111.26 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1391.78, 62.58, 111.26, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-77"
+    }
+  },
+  {
+    "trans": [ 1395.81, 63.11, 116.43 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1395.81, 63.11, 116.43, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-78"
+    }
+  },
+  {
+    "trans": [ 1400.19, 63.47, 122.86 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1400.19, 63.47, 122.86, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-79"
+    }
+  },
+  {
+    "trans": [ 1418.73, 63.62, 127.53 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1418.73, 63.62, 127.53, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-80"
+    }
+  },
+  {
+    "trans": [ 1428.39, 63.62, 126.03 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1428.39, 63.62, 126.03, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-81"
+    }
+  },
+  {
+    "trans": [ 1441.48, 63.65, 123.93 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1441.48, 63.65, 123.93, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-82"
+    }
+  },
+  {
+    "trans": [ 1466.84, 64.55, 125.76 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1466.84, 64.55, 125.76, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-83"
+    }
+  },
+  {
+    "trans": [ 1474.54, 64.89, 127.21 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1474.54, 64.89, 127.21, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-84"
+    }
+  },
+  {
+    "trans": [ 1481.78, 65.19, 128.87 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1481.78, 65.19, 128.87, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-85"
+    }
+  },
+  {
+    "trans": [ 1503.16, 67.29, 132.33 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1503.16, 67.29, 132.33, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-86"
+    }
+  },
+  {
+    "trans": [ 1506.76, 68.19, 137.76 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1506.76, 68.19, 137.76, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-87"
+    }
+  },
+  {
+    "trans": [ 1509.90, 68.86, 143.25 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1509.90, 68.86, 143.25, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-88"
+    }
+  },
+  {
+    "trans": [ 1512.52, 69.36, 152.19 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1512.52, 69.36, 152.19, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-89"
+    }
+  },
+  {
+    "trans": [ 1518.11, 69.86, 160.40 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1518.11, 69.86, 160.40, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-90"
+    }
+  },
+  {
+    "trans": [ 1536.55, 69.38, 158.87 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1536.55, 69.38, 158.87, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-91"
+    }
+  },
+  {
+    "trans": [ 1542.34, 70.89, 147.34 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1542.34, 70.89, 147.34, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-92"
+    }
+  },
+  {
+    "trans": [ 1550.53, 67.50, 134.92 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1550.53, 67.50, 134.92, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-93"
+    }
+  },
+  {
+    "trans": [ 1592.12, 61.58, 123.99 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1592.12, 61.58, 123.99, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-94"
+    }
+  },
+  {
+    "trans": [ 1599.60, 61.81, 113.19 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1599.60, 61.81, 113.19, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-95"
+    }
+  },
+  {
+    "trans": [ 1611.66, 56.94, 99.30 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1611.66, 56.94, 99.30, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-96"
+    }
+  },
+  {
+    "trans": [ 1623.74, 55.38, 88.62 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1623.74, 55.38, 88.62, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-97"
+    }
+  },
+  {
+    "trans": [ 1380.78, 49.23, 46.91 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1380.78, 49.23, 46.91, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-98"
+    }
+  },
+  {
+    "trans": [ 1382.97, 49.10, 60.96 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1382.97, 49.10, 60.96, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-99"
+    }
+  },
+  {
+    "trans": [ 1395.84, 49.53, 72.12 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1395.84, 49.53, 72.12, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-100"
+    }
+  },
+  {
+    "trans": [ 1399.03, 49.27, 86.27 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1399.03, 49.27, 86.27, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-101"
+    }
+  },
+  {
+    "trans": [ 1387.45, 49.59, 93.64 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1387.45, 49.59, 93.64, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-102"
+    }
+  },
+  {
+    "trans": [ 1378.14, 50.08, 105.03 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1378.14, 50.08, 105.03, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-103"
+    }
+  },
+  {
+    "trans": [ 1390.26, 49.48, 118.98 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1390.26, 49.48, 118.98, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-104"
+    }
+  },
+  {
+    "trans": [ 1409.70, 49.90, 115.09 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1409.70, 49.90, 115.09, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-105"
+    }
+  },
+  {
+    "trans": [ 1423.06, 49.18, 118.46 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1423.06, 49.18, 118.46, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-106"
+    }
+  },
+  {
+    "trans": [ 1431.77, 50.67, 129.64 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1431.77, 50.67, 129.64, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-107"
+    }
+  },
+  {
+    "trans": [ 1442.67, 52.59, 140.82 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1442.67, 52.59, 140.82, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-108"
+    }
+  },
+  {
+    "trans": [ 1456.80, 54.43, 145.61 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1456.80, 54.43, 145.61, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-109"
+    }
+  },
+  {
+    "trans": [ 1473.04, 53.41, 138.04 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1473.04, 53.41, 138.04, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-110"
+    }
+  },
+  {
+    "trans": [ 1483.89, 53.14, 124.00 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1483.89, 53.14, 124.00, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-111"
+    }
+  },
+  {
+    "trans": [ 1500.53, 50.39, 114.17 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1500.53, 50.39, 114.17, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-112"
+    }
+  },
+  {
+    "trans": [ 1516.62, 49.20, 112.95 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1516.62, 49.20, 112.95, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-113"
+    }
+  },
+  {
+    "trans": [ 1536.07, 48.56, 114.39 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1536.07, 48.56, 114.39, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-114"
+    }
+  },
+  {
+    "trans": [ 1553.50, 50.18, 116.28 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1553.50, 50.18, 116.28, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-115"
+    }
+  },
+  {
+    "trans": [ 1572.37, 48.32, 110.98 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1572.37, 48.32, 110.98, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-116"
+    }
+  },
+  {
+    "trans": [ 1581.54, 48.39, 95.53 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1581.54, 48.39, 95.53, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-117"
+    }
+  },
+  {
+    "trans": [ 1597.81, 49.63, 86.80 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1597.81, 49.63, 86.80, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-118"
+    }
+  },
+  {
+    "trans": [ 1608.17, 48.42, 70.76 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1608.17, 48.42, 70.76, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-119"
+    }
+  },
+  {
+    "trans": [ 1617.74, 49.73, 55.54 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1617.74, 49.73, 55.54, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-120"
+    }
+  },
+  {
+    "trans": [ 1620.97, 49.04, 36.03 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1620.97, 49.04, 36.03, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-121"
+    }
+  },
+  {
+    "trans": [ 1621.86, 48.92, 14.90 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1621.86, 48.92, 14.90, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-122"
+    }
+  },
+  {
+    "trans": [ 1630.05, 48.79, 0.04 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1630.05, 48.79, 0.04, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-123"
+    }
+  },
+  {
+    "trans": [ 1644.81, 49.09, -11.32 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1644.81, 49.09, -11.32, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-124"
+    }
+  },
+  {
+    "trans": [ 1662.46, 48.74, -17.92 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1662.46, 48.74, -17.92, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-125"
+    }
+  },
+  {
+    "trans": [ 1676.66, 48.13, -30.50 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1676.66, 48.13, -30.50, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-126"
+    }
+  },
+  {
+    "trans": [ 1742.10, 71.34, -35.07 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1742.10, 71.34, -35.07, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-127"
+    }
+  },
+  {
+    "trans": [ 1751.70, 71.44, -34.71 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1751.70, 71.44, -34.71, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-128"
+    }
+  },
+  {
+    "trans": [ 1765.68, 71.74, -34.45 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1765.68, 71.74, -34.45, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-129"
+    }
+  },
+  {
+    "trans": [ 1780.59, 71.86, -71.00 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1780.59, 71.86, -71.00, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-130"
+    }
+  },
+  {
+    "trans": [ 1778.56, 71.25, -81.09 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1778.56, 71.25, -81.09, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-131"
+    }
+  },
+  {
+    "trans": [ 1777.42, 71.62, -90.78 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1777.42, 71.62, -90.78, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-132"
+    }
+  },
+  {
+    "trans": [ 1798.71, 87.80, -125.82 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1798.71, 87.80, -125.82, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-133"
+    }
+  },
+  {
+    "trans": [ 1805.85, 88.11, -126.23 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1805.85, 88.11, -126.23, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-134"
+    }
+  },
+  {
+    "trans": [ 1805.45, 91.93, -134.79 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1805.45, 91.93, -134.79, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-135"
+    }
+  },
+  {
+    "trans": [ 1802.40, 90.58, -139.72 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1802.40, 90.58, -139.72, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-136"
+    }
+  },
+  {
+    "trans": [ 1798.48, 94.73, -140.21 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1798.48, 94.73, -140.21, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-137"
+    }
+  },
+  {
+    "trans": [ 1789.87, 97.26, -139.72 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1789.87, 97.26, -139.72, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-138"
+    }
+  },
+  {
+    "trans": [ 1778.97, 98.32, -135.00 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1778.97, 98.32, -135.00, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-139"
+    }
+  },
+  {
+    "trans": [ 1774.86, 95.64, -126.00 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1774.86, 95.64, -126.00, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-140"
+    }
+  },
+  {
+    "trans": [ 1817.43, 69.36, -127.21 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1817.43, 69.36, -127.21, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-141"
+    }
+  },
+  {
+    "trans": [ 1806.93, 69.40, -146.69 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1806.93, 69.40, -146.69, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-142"
+    }
+  },
+  {
+    "trans": [ 1785.72, 69.96, -150.75 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1785.72, 69.96, -150.75, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-143"
+    }
+  },
+  {
+    "trans": [ 1767.35, 69.37, -133.95 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1767.35, 69.37, -133.95, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-144"
+    }
+  },
+  {
+    "trans": [ 1768.71, 69.46, -113.18 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1768.71, 69.46, -113.18, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-145"
+    }
+  },
+  {
+    "trans": [ 1263.51, 35.58, -40.27 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1263.51, 35.58, -40.27, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-146"
+    }
+  },
+  {
+    "trans": [ 1388.85, 49.60, 66.82 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1388.85, 49.60, 66.82, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-147"
+    }
+  },
+  {
+    "trans": [ 1424.44, 49.65, 52.12 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1424.44, 49.65, 52.12, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-148"
+    }
+  },
+  {
+    "trans": [ 1431.19, 53.13, 53.70 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1431.19, 53.13, 53.70, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-149"
+    }
+  },
+  {
+    "trans": [ 1438.14, 56.14, 60.48 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1438.14, 56.14, 60.48, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-150"
+    }
+  },
+  {
+    "trans": [ 1442.38, 58.36, 68.68 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1442.38, 58.36, 68.68, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-151"
+    }
+  },
+  {
+    "trans": [ 1449.85, 56.15, 74.81 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1449.85, 56.15, 74.81, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-152"
+    }
+  },
+  {
+    "trans": [ 1459.50, 53.26, 72.27 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1459.50, 53.26, 72.27, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-153"
+    }
+  },
+  {
+    "trans": [ 1467.72, 49.55, 69.10 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1467.72, 49.55, 69.10, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-154"
+    }
+  },
+  {
+    "trans": [ 1474.95, 52.42, 73.18 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1474.95, 52.42, 73.18, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-155"
+    }
+  },
+  {
+    "trans": [ 1385.22, 49.87, 38.08 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1385.22, 47.87, 38.08, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-156"
+    }
+  },
+  {
+    "trans": [ 1508.52, 40.45, 69.58 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1508.52, 40.45, 69.58, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-157"
+    }
+  },
+  {
+    "trans": [ 1511.93, 40.45, 74.23 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1511.93, 40.45, 74.23, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-158"
+    }
+  },
+  {
+    "trans": [ 1515.13, 40.45, 69.26 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1515.13, 40.45, 69.26, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-159"
+    }
+  },
+  {
+    "trans": [ 1523.74, 40.45, 76.58 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1523.74, 40.45, 76.58, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-160"
+    }
+  },
+  {
+    "trans": [ 1526.37, 40.45, 80.95 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1526.37, 40.45, 80.95, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-161"
+    }
+  },
+  {
+    "trans": [ 1531.49, 40.45, 76.75 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1531.49, 40.45, 76.75, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-162"
+    }
+  },
+  {
+    "trans": [ 1533.84, 40.45, 63.47 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1533.84, 40.45, 63.47, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-163"
+    }
+  },
+  {
+    "trans": [ 1537.85, 41.12, 60.60 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1537.85, 41.12, 60.60, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-164"
+    }
+  },
+  {
+    "trans": [ 1537.83, 40.45, 67.12 ], // translation
+    "etype": "money", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1537.83, 40.45, 67.12, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-money-165"
+    }
+  },
+
+  /////////////////////////////////////////////////// POWER CELLS //////////////////////////////////////////////////
+  {
+    "trans": [ 1049.81, 4.40, -57.99 ], // translation
+    "etype": "fuel-cell", // actor type
+    "game_task": "(game-task overgrown-cavecell)", // associated game task
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1049.81, 2.40, -57.99, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-fuel-cell-01",
+      "eco-info": [ "int32", 6, 118 ],
+      "movie-pos": ["movie-pos", [1049.81, 2.40, -57.99, 1.255]]
+    }
+  },
+  {
+    "trans": [ 1526.59, 72.28, 169.88 ], // translation
+    "etype": "fuel-cell", // actor type
+    "game_task": "(game-task overgrown-nettlecell)", // associated game task
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1526.59, 70.28, 169.88, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-fuel-cell-02",
+      "eco-info": [ "int32", 6, 116 ]
+    }
+  },
+  {
+    "trans": [ 1792.58, 96.87, -112.89 ], // translation
+    "etype": "fuel-cell", // actor type
+    "game_task": "(game-task overgrown-treecell)", // associated game task
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1792.58, 95.87, -112.89, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-fuel-cell-03",
+      "eco-info": [ "int32", 6, 117 ],
+      "movie-pos": ["movie-pos", [1792.58, 95.87, -112.89, 5.8]]
+    }
+  },
+  /////////////////////////////////////////////////// SCOUTFLIES //////////////////////////////////////////////////
+  {
+  "trans": [ 1284.30, 46.67, -58.34 ], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task overgrown-buzzer)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ 1284.30, 46.67, -58.34, 10 ], // bounding sphere
+  "lump": {
+    "name": "overgrown-fly1",
+    "crate-type": "'iron",
+    //"eco-info": [ "int32", 8, 116 ],
+    "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 0 ],
+   // "movie-pos": [ "meters", 1284.30, 46.67, -58.34 ],
+    "movie-pos": ["movie-pos", [1284.30, 46.67, -58.34, -10.0]]
+  }
+},
+{
+  "trans": [ 1380.15, 58.25, 80.99 ], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task overgrown-buzzer)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ 1380.15, 58.25, 80.99, 10 ], // bounding sphere
+  "lump": {
+    "name": "overgrown-fly2",
+    "crate-type": "'iron",
+    //"eco-info": [ "int32", 8, 116 ],
+    "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 1 ],
+    //"movie-pos": [ "meters", 1380.15, 58.25, 80.99 ]
+    "movie-pos": ["movie-pos", [1380.15, 58.25, 80.99, 80.0]]
+  }
+},
+{
+  "trans": [ 1559.51, 47.77, 153.46 ], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task overgrown-buzzer)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ 1559.51, 47.77, 153.46, 10 ], // bounding sphere
+  "lump": {
+    "name": "overgrown-fly3",
+    "crate-type": "'iron",
+    //"eco-info": [ "int32", 8, 116 ],
+    "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 2 ],
+    //"movie-pos": [ "meters", 1559.51, 47.77, 153.46 ]
+    "movie-pos": ["movie-pos", [1559.51, 47.77, 153.46, 22.0]]
+  }
+},
+{
+  "trans": [ 1626.92, 46.29, -26.57 ], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task overgrown-buzzer)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ 1626.92, 46.29, -26.57, 10 ], // bounding sphere
+  "lump": {
+    "name": "overgrown-fly4",
+    "crate-type": "'iron",
+    //"eco-info": [ "int32", 8, 116 ],
+    "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 3 ],
+    //"movie-pos": [ "meters", 1626.92, 46.29, -26.57 ]
+    "movie-pos": ["movie-pos", [1626.92, 46.29, -26.57, 87.0]]
+  }
+},
+{
+  "trans": [ 1827.42, 69.14, -140.14 ], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task overgrown-buzzer)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ 1827.42, 69.14, -140.14, 10 ], // bounding sphere
+  "lump": {
+    "name": "overgrown-fly5",
+    "crate-type": "'iron",
+    //"eco-info": [ "int32", 8, 116 ],
+    "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 4 ],
+    //"movie-pos": [ "meters", 1827.42, 69.14, -140.14 ]
+    "movie-pos": ["movie-pos", [1827.42, 69.14, -140.14, 1.0]]
+  }
+},
+{
+  "trans": [ 1127.98, 16.51,  39.03 ], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task overgrown-buzzer)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ 1127.98, 16.51, 39.03, 10 ], // bounding sphere
+  "lump": {
+    "name": "overgrown-fly6",
+    "crate-type": "'iron",
+    //"eco-info": [ "int32", 8, 116 ],
+    "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 5 ],
+    "movie-pos": [ "meters",  1123.73, 0.34, 20.60 ] 
+  }
+},
+
+{
+  "trans": [ 1337.10, 35.42, 19.82 ], // translation
+  "etype": "crate", // actor type
+  "game_task": "(game-task overgrown-buzzer)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ 1337.10, 35.42, 19.82, 10 ], // bounding sphere
+  "lump": {
+    "name": "overgrown-fly7",
+    "crate-type": "'iron",
+    //"eco-info": [ "int32", 8, 116 ],
+    "eco-info": [ "buzzer-info", "(game-task overgrown-buzzer)", 6 ],
+    //"movie-pos": [ "meters", 1337.10, 35.42, 19.82 ]
+    "movie-pos": ["movie-pos", [1337.10, 35.42, 19.82, -76.0]]
+  }
+},
+
+//////////////////////////////////////////LAUNCHER///////////////////////////////////
+{
+  "trans": [ 1684.97, 47.98, -44.10 ],
+  "etype": "launcher",
+  "game_task": 0,
+  "quat": [ 0, 0, 0, 1 ],
+  "bsphere": [ 1684.97, 47.98, -44.10, 10 ],
+  "lump": {
+    "name": "overgrown-launcher-1",
+    "spring-height": [ "meters", 50.0 ],
+    "vis-dist": [ "meters", 200.0 ]
+  }
+},
+
+///////////////////////////////////////BLUE ECO/////////////////////////////////////
+{
+  "trans": [ 1684.97, 49.98, -44.10 ], // translation
+  "etype": "eco-blue", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ 1684.97, 49.98, -44.10, 10 ], // bounding sphere
+  "lump": {
+    "name": "overgrown-eco-blue1"
+  }
+},
+
+{
+  "trans": [ 1798.0, 99.32, -113.7 ], // translation
+  "etype": "eco-blue", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ 1798.0, 94.32, -113.7, 10 ], // bounding sphere
+  "lump": {
+    "name": "overgrown-eco-blue2"
+  }
+},
+
+//////////////////////////////////TRAMPOLINE/////////////////////////////////
+
+{
+  "trans": [ 1791.12, 70.40, -124.45 ], // translation
+  "etype": "springbox", // actor type
+  "game_task": "(game-task none)", // associated game task (for powercells, etc)
+  "quat": [ 0, 0, 0, 1 ], // quaternion
+  "bsphere": [ 1791.12, 70.85, -124.45, 10 ], // bounding sphere
+  "lump": {
+    "name": "overgrown-trampoline-1"
+  }
+},
+
+//////////////////////////////////SWINGPOLES/////////////////////////////////
+{
+  "trans": [ 1794.60, 93.84, -140.73 ], // translation
+  "etype": "swingpole", // actor type
+  "game_task": 0, // associated game task (for powercells, etc)
+  "quat": [ 0.121, -0.694, -0.697, 0.133 ], // quaternion - Total agony. use the EDGE of the cube in blender. point it to where you want it to be.
+  "bsphere": [ 1794.60, 93.84, -140.73, 10 ], // bounding sphere
+  "lump": {
+    "name": "overgrown-swingpole-01",
+    "scale": [ "float", 1.0, 1.0, 1.0, 1.0 ]
+  }
+},
+
+
+
+//////////////////////////////////PRECURSOR PLATFORM/////////////////////////////////
+
+
+     {
+       "trans": [1785.0, 94.69, -140.5], // translation
+       "etype": "plat",  // actor type
+       "game_task": "(game-task none)", // associated game task (for powercells, etc)
+       "quat": [0, 0, 0, 1], // quaternion
+       "bsphere": [-7.41, 3.5, 28.42, 10], // bounding sphere
+       "lump": {
+         "name": "overgrown-plat-1",
+         "path": [
+          "vector4m",
+          [ 1785.0, 94.69, -140.5, 1.0 ], // fourth value seems to have no effect
+          [ 1785.0, 92.69, -140.5, 1.0 ],
+          [ 1785.0, 90.69, -140.5, 1.0 ]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "sync": ["float", 5.0, 0.0] // platform faster or slower. higher is slower. Plat-ecos move without this, but regular plats seem to need it.
+       }
+     },
+
+     {
+      "trans": [ 1774.0, 93.32, -116.7 ], // translation
+      "etype": "plat-eco", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1774.0, 93.32, -116.7, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-plat-2",
+        "path": [
+          "vector4m",
+          [ 1774.0, 93.32, -116.7, 1.0 ], // fourth value seems to have no effect
+          [ 1782.0, 94.65, -112.1, 1.0 ],
+          [ 1792.0, 95.32, -108.5, 1.0 ]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ]
+      }
+    },
+
+    {
+      "trans": [ 1798.0, 91.32, -113.7 ], // translation
+      "etype": "plat-eco-return", // actor type
+      "game_task": 1, // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1798.0, 91.32, -113.7, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-plat-3-return",
+        "notice-dist":["meters", 2.5],
+        "path": [
+          "vector4m",
+          [1798.0, 91.32, -113.7, 1.0],
+          [1798.0, 90.32, -113.7, 1.0],
+          [1794.92, 84.91, -90.51, 1.0],
+          [1788.49, 77.82, -64.7, 1.0],
+          [1765.1, 74.96, -49.28, 1.0],
+          [1738.48, 75.37, -47.59, 1.0],
+          [1705.9, 73.95, -46.88, 1.0],
+          [1683.2, 59.53, -45.92, 1.0],
+          [1658.85, 52.38, -46.04, 1.0],
+          [1630.64, 51.96, -44.86, 1.0],
+          [1603.59, 51.26, -43.01, 1.0],
+          [1597.05, 50.55, -11.9, 1.0],
+          [1594.03, 52.82, 16.65, 1.0],
+          [1580.93, 54.17, 58.29, 1.0],
+          [1538.93, 53.11, 76.35, 1.0],
+          [1503.73, 52.26, 84.76, 1.0],
+          [1462.8, 52.12, 89.69, 1.0],
+          [1434.99, 53.55, 73.76, 1.0],
+          [1425.01, 50.98, 48.83, 1.0],
+          [1425.87, 52.0, 14.52, 1.0],
+          [1413.82, 50.23, -7.55, 1.0],
+          [1389.46, 48.72, -5.78, 1.0],
+          [1370.75, 53.56, -14.85, 1.0]
+        ],
+      "path-k": ["float", // Controls the curve for the paths - optional. Float array. first 4 need to be the same, last value = 4th to last
+        0.0, 0.0, 
+        0.0, 0.0,
+        1.0, 2.0, 
+        3.0, 4.0, 
+        5.0, 6.0,
+        7.0, 8.0,
+        9.0, 10.0, 
+        11.0, 12.0, 
+        13.0, 14.0,
+        15.0, 16.0,
+        17.0, 18.0, 
+        19.0, 21.0, 
+        20.0, 22.0, 
+        21.0],
+    "sync": ["float", 20.000, 0.0]
+      }
+    },
+
+    /////////////////////////////////////////////////////////ENEMIES/////////////////////////////////////////////////
+    {
+      "aid": 50500,
+      "trans": [1210.49, 23.06, -18.38],
+      "etype": "muse-overgrown",
+      "game_task": "(game-task overgrown-muse)",
+      "quat" : [0, 0, 0, 1],
+      "bsphere": [1210.49, 23.06, -18.38, 10],
+      "lump": {
+        "name": "overgrown-muse-1",
+        "vis-dist": ["meters", 200.0],
+        "cam-notice-dist": ["meters", 30.0],
+        "idle-distance": ["meters", 50.0],
+        "cam-vert": ["meters", 8.0],
+        "cam-horz": ["meters", 20.0],
+        "path": ["vector3m",
+        [1262.65, 26.29, -33.18],
+[1227.5, 22.7, -21.4],
+[1226.29, 22.59, -18.67],
+[1211.43, 23.02, -24.68],
+[1204.81, 23.37, -24.77],
+[1201.78, 23.7, -20.59],
+[1208.4, 23.21, -19.13],
+[1231.28, 22.58, -10.16],
+[1245.64, 24.22, -3.87],
+[1255.17, 30.77, -0.04],
+[1263.31, 34.74, 2.08],
+[1302.70, 34.33,  8.40],
+[1314.58, 22.67, -18.66],
+[1331.3, 22.95, -24.52],
+[1343.1, 31.71, -27.32],
+[1347.54, 42.45, -29.47],
+[1352.6, 49.24, -30.73],
+[1357.19, 49.87, -29.74],
+[1367.83, 55.61, -24.17],
+[1372.98, 56.06, -23.05],
+[1388.01, 60.36, -21.18],
+[1392.98, 60.9, -19.66],
+[1393.65, 62.24, -8.99],
+[1394.78, 56.25, 16.23],
+[1391.29, 48.4, 33.48],
+[1383.39, 47.04, 64.38],
+[1384.85, 47.14, 67.42],
+[1403.51, 47.2, 75.22],
+[1407.32, 47.23, 79.44],
+[1406.21, 47.36, 83.15],
+[1390.35, 47.52, 90.89],
+[1379.78, 47.85, 105.44],
+[1375.85, 48.99, 111.09],
+[1400.41, 47.59, 112.69],
+[1424.96, 47.14, 113.43],
+[1440.57, 50.48, 140.97],
+[1483.03, 51.45, 140.94],
+[1483.05, 50.78, 113.97],
+[1537.18, 46.68, 115.81],
+[1561.78, 48.36, 120.67],
+[1579.07, 46.18, 104.37],
+[1588.86, 47.18, 87.28],
+[1603.46, 47.4, 86.62],
+[1612.31, 46.51, 70.44],
+[1622.6, 47.09, 23.15],
+[1622.74, 47.01, -16.37],
+[1651.21, 48.22, 14.06],
+[1651.93, 46.58, 53.95],
+[1635.77, 46.5, 75.36],
+[1624.66, 53.4, 89.67],
+[1613.73, 54.93, 100.1],
+[1606.21, 59.49, 108.53],
+[1591.58, 59.4, 121.4],
+[1576.23, 60.47, 125.34],
+[1550.89, 65.51, 134.51],
+[1507.82, 66.52, 140.05],
+[1501.79, 65.08, 131.6],
+[1460.21, 62.35, 122.7],
+[1451.15, 61.39, 116.13],
+[1435.82, 47.0, 101.17],
+[1429.35, 47.19, 88.77],
+[1416.74, 46.33, 61.25],
+[1412.9, 47.31, 25.74],
+[1410.92, 46.42, 2.01],
+[1365.19, 44.64, -9.63],
+[1332.45, 20.55, -7.96],
+[1297.37, 20.64, -4.99],
+[1297.92, 23.5, -25.81],
+[1287.13, 22.7, -28.42],
+[1265.04, 26.6, -29.26],
+[1247.0, 27.25, -22.3],
+[1262.65, 26.29, -33.18]
+          ],
+        "sound-name": "sksp0057",
+        "play-mode": "'sidekick",
+        "options": ["enum-uint32", "(fact-options skip-jump-anim)"],
+        "cmds": ["int32", 7, 23],
+        "text-id":["int32", 635],
+        "movie-pos": [ "meters", 1644.71, 47.52, 20.29 ]
+      }
+    },
+///////////////////////////////////////////////////AREA ONE ENEMIES///////////////////////////////////////////
+    {
+      "aid": 50600,
+      "trans": [ 1162.25, -0.87, -0.61 ], // translation
+      "etype": "junglefish", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1162.25, -0.87, -0.61, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-fish-1",
+        "path": [
+          "vector4m",
+          [ 1162.25, -0.87, -0.61, 1.0 ], // fourth value seems to have no effect
+          [ 1154.64, -0.80, -3.21, 1.0 ],
+          [1145.83, -0.78, -16.21, 1.0],
+          [1140.38, -0.65, -17.73, 1.0],
+          [1127.85, -0.78, -5.66, 1.0],
+          [1097.47, -0.51,  25.68, 1.0],
+          [1086.73, -0.95,  24.17, 1.0],
+          [1052.35, -0.97,  -7.51, 1.0],
+          [1047.51, -0.92, -24.38, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ]
+      }
+    },
+    {
+      "aid": 50601,
+      "trans": [ 1097.47, -0.51,  25.68 ], // translation
+      "etype": "junglefish", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1097.47, -0.51,  25.68, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-fish-2",
+        "path": [
+          "vector4m",
+          [1097.47, -0.51,  25.68, 1.0],
+          [1086.73, -0.95,  24.17, 1.0],
+          [1052.35, -0.97,  -7.51, 1.0],
+          [1047.51, -0.92, -24.38, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 50600 ]
+      }
+    },
+    {
+      "aid": 50602,
+      "trans": [ 1140.38, -0.65, -17.73 ], // translation
+      "etype": "junglefish", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1140.38, -0.65, -17.73, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-fish-3",
+        "path": [
+          "vector4m",
+          [1140.38, -0.65, -17.73, 1.0],
+          [1127.85, -0.78, -5.66, 1.0],
+          [1097.47, -0.51,  25.68, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 50600 ]
+      }
+    },
+    {
+      "aid": 50700,
+      "trans": [ 1093.81,  1.11, 10.10 ], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1162.25, -0.87, -0.61, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-1",
+        "path": [
+          "vector4m",
+          [1093.81, 1.11, 10.1, 1.0],
+          [1075.47, 0.47, -2.37, 1.0],
+          [1061.91, 0.53, -23.53, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-sphere": ["vector4m",
+        [1067.72, 0.55, 24.28, 3],
+        [1162.27, 1.21, -21.71, 3]]
+
+      }
+    },
+    {
+      "aid": 50701,
+      "trans": [ 1100.35, 1.18, 11.49 ], // translation
+      "etype": "hopper", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1140.38, -0.65, -17.73, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-hopper-1",
+        "path": [
+          "vector4m",
+          [1100.35, 1.18, 11.49, 1.0],
+          [1118.75, 0.74, -11.91, 1.0],
+          [1132.96, 0.94, -22.36, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 50700 ],
+        "nav-sphere-actor": [ "uint32", 50700 ]
+      }
+    },
+
+    {
+      "aid": 50702,
+      "trans": [ 1109.97, 0.07, 29.24 ], // translation
+      "etype": "hopper", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1140.38, -0.65, -17.73, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-hopper-2",
+        "path": [
+          "vector4m",
+          [1109.97, 0.07, 29.24, 1.0],
+          [1129.96, 0.04, 8.62, 1.0],
+          [1156.03, 0.95, 19.7, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 50700 ],
+        "nav-sphere-actor": [ "uint32", 50700 ]
+      }
+    },
+
+    {
+      "aid": 50703,
+      "trans": [ 1160.11, 0.36, 6.4 ], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1160.11, 0.36, 6.4, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-2",
+        "path": [
+          "vector4m",
+          [1160.11, 0.36, 6.4, 1.0],
+          [1141.28, 0.62, 20.26, 1.0],
+          [1120.27, 0.07, 10.1, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 50700 ],
+        "nav-sphere-actor": [ "uint32", 50700 ]
+      }
+    },
+    {
+      "aid": 50750,
+      "trans": [ 1236.31,  20.67, -1.49 ], // translation
+      "etype": "lurkercrab", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1337.29, 20.58, -6.48, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-lurkercrab-1",
+        "path": [
+          "vector4m",
+          [1236.31,  20.67, -1.49, 1.0],
+          [1223.60, 20.68, 4.53, 1.0],
+          [1209.81,  20.81, -4.41, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ]
+      }
+    },
+    {
+      "aid": 50760,
+      "trans": [ 1337.29, 20.58, -6.48 ], // translation
+      "etype": "lurkercrab", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1236.31,  20.67, -1.49, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-lurkercrab-2",
+        "path": [
+          "vector4m",
+          [1337.29, 20.58, -6.48, 1.0],
+          [1323.42, 20.63, -6.93, 1.0],
+          [1304.53,  20.68, -4.43, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ]
+      }
+    },
+
+    {
+      "trans": [ 1060.47, 0.37,  17.49 ], // translation
+      "etype": "junglesnake", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1060.47,  0.37,  17.49, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-snake-1"
+      }
+    },
+
+    {
+      "trans": [ 1154.79, 1.14, -14.25 ], // translation
+      "etype": "junglesnake", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1154.79, 1.14, -14.25, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-snake-2"
+      }
+    },
+    ///////////////////////////////////////////////////AREA TWO ENEMIES///////////////////////////////////////////
+    {
+      "trans": [ 1298.35, 23.85, -29.10 ], // translation
+      "etype": "junglesnake", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1298.35, 23.85, -29.10, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-snake-3"
+      }
+    },
+    {
+      "trans": [ 1326.07, 34.63,  17.63 ], // translation
+      "etype": "junglesnake", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1326.07, 34.63,  17.63, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-snake-3"
+      }
+    },
+    {
+      "aid": 50800,
+      "trans": [1227.93, 22.62, -19.15], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1162.25, -0.87, -0.61, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-3",
+        "path": [
+          "vector4m",
+          [1227.93, 22.62, -19.15, 1.0],
+          [1215.46, 22.51, -12.18, 1.0],
+          [1204.73, 23.47, -23.26, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+      "nav-mesh-sphere": ["vector4m",
+        [1272.62, 34.68, -2.28, 3.0],
+        [1334.56, 35.38, 7.36, 3.0],
+        [1295.91, 23.62, -35.33, 3.0]]
+
+      }
+    },
+    {
+      "aid": 50850,
+      "trans": [ 1267.88, 35.47, 14.32 ], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1267.88, 35.47, 14.32, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-5",
+        "path": [
+          "vector4m",
+          [1267.88, 35.47, 14.32, 1.0],
+          [1286.32, 34.74, 5.53, 1.0],
+          [1306.73, 34.88, 15.99, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-sphere-actor": [ "uint32", 50800 ]
+      }
+    },
+    {
+      "aid": 50851,
+      "trans": [ 1227.32, 35.98, 26.64 ], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1227.32, 35.98, 26.64, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-6",
+        "path": [
+          "vector4m",
+          [1227.32, 35.98, 26.64, 1.0],
+          [1240.05, 35.02, 13.62, 1.0],
+          [1255.73, 34.92, 18.17, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 50850 ],
+        "nav-sphere-actor": [ "uint32", 50800 ]
+      }
+    },
+    /////////////////////////////////////////////AREATHREE ENEMIES///////////////////////////////////////////
+    {
+      "aid": 50900,
+      "trans": [ 1398.5, 61.28, -27.97 ], // translation
+      "etype": "hopper", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1398.5, 61.28, -27.97, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-hopper-4",
+        "path": [
+          "vector4m",
+          [1398.5, 61.28, -27.97, 1.0],
+          [1393.01, 60.64, -17.71, 1.0],
+          [1384.38, 60.08, -23.95, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ]
+      }
+    },
+    {
+      "aid": 51000,
+      "trans": [ 1399.43, 47.28, 86.51 ], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1399.43, 47.28, 86.51, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-7",
+        "path": [
+          "vector4m",
+          [1399.43, 47.28, 86.51, 1.0],
+          [1400.57, 47.2, 76.98, 1.0],
+          [1401.29, 47.4, 67.43, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-sphere": ["vector4m",
+          [1399.75, 48.17, 55.8, 10.09],
+          [1381.49, 48.37, 82.07, 9.01],
+          [1388.64, 48.37, 105.49, 12.42],
+          [1405.62, 48.37, 132.69, 16.82],
+          [1455.28, 48.37, 121.99, 15.97],
+          [1417.38, 47.14, 32.3, 2.0],
+          [1417.7, 48.66, 93.74, 3.0],
+          [1486.86, 50.65, 118.16, 2.0],
+          [1587.56, 46.47, 81.18, 2.0],
+          [1654.51, 47.52, 64.56, 2.0],
+          [1621.3, 46.72, -25.46, 3.0]]
+      }
+    },
+    {
+      "aid": 51001,
+      "trans": [ 1400.53, 47.6, 112.59 ], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1400.53, 47.6, 112.59, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-8",
+        "path": [
+          "vector4m",
+          [1400.53, 47.6, 112.59, 1.0],
+          [1418.33, 48.62, 103.68, 1.0],
+          [1438.49, 46.35, 93.26, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51000 ],
+        "nav-sphere-actor": [ "uint32", 51000 ]
+      }
+    },
+    {
+      "aid": 51002,
+      "trans": [ 1441.06, 50.15, 135.65 ], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1441.06, 50.15, 135.65, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-9",
+        "path": [
+          "vector4m",
+          [1441.06, 50.15, 135.65, 1.0],
+          [1467.32, 52.51, 154.47, 1.0],
+          [1482.48, 51.16, 138.35, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51000 ],
+        "nav-sphere-actor": [ "uint32", 51000 ]
+      }
+    },
+    {
+      "aid": 51003,
+      "trans": [ 1514.4, 47.12, 112.38 ], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1441.06, 50.15, 135.65, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-10",
+        "path": [
+          "vector4m",
+          [1514.4, 47.12, 112.38, 1.0],
+          [1536.63, 46.5, 114.22, 1.0],
+          [1556.09, 47.93, 113.83, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51000 ],
+        "nav-sphere-actor": [ "uint32", 51000 ]
+      }
+    },
+    {
+      "aid": 51004,
+      "trans": [ 1578.53, 46.43, 138.75 ], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1578.53, 46.43, 138.75, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-11",
+        "path": [
+          "vector4m",
+          [1578.53, 46.43, 138.75, 1.0],
+          [1568.36, 46.46, 138.42, 1.0],
+          [1560.47, 47.73, 130.28, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51000 ],
+        "nav-sphere-actor": [ "uint32", 51000 ]
+      }
+    },
+    {
+      "aid": 51005,
+      "trans": [ 1583.63, 46.56, 94.34 ], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1583.63, 46.56, 94.34, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-12",
+        "path": [
+          "vector4m",
+          [1583.63, 46.56, 94.34, 1.0],
+          [1603.55, 47.38, 87.36, 1.0],
+          [1607.56, 46.29, 63.83, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51000 ],
+        "nav-sphere-actor": [ "uint32", 51000 ]
+      }
+    },
+    {
+      "aid": 51006,
+      "trans": [ 1615.82, 47.12, 30.79 ], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1615.82, 47.12, 30.79, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-14",
+        "path": [
+          "vector4m",
+          [1615.82, 47.12, 30.79, 1.0],
+          [1636.43, 47.44, 22.0, 1.0],
+          [1660.99, 47.31, 36.72, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51000 ],
+        "nav-sphere-actor": [ "uint32", 51000 ]
+      }
+    },
+    {
+      "aid": 51007,
+      "trans": [ 1667.74, 46.89, 16.33 ], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1667.74, 46.89, 16.33, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-15",
+        "path": [
+          "vector4m",
+          [1667.74, 46.89, 16.33, 1.0],
+          [1648.84, 47.79, 6.55, 1.0],
+          [1638.81, 47.56, -13.99, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51000 ],
+        "nav-sphere-actor": [ "uint32", 51000 ]
+      }
+    },
+    {
+      "aid": 51008,
+      "trans": [ 1427.80,  47.57,  90.10 ], // translation
+      "etype": "lurkerpuppy", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1427.80,  7.57,  90.10, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-puppy-1",
+        "path": [
+          "vector4m",
+          [1427.80,  47.57,  90.10, 1.0],
+          [1434.83, 47.69, 116.05, 1.0],
+          [1439.94, 50.51, 142.70, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51000 ],
+        "nav-sphere-actor": [ "uint32", 51000 ]
+      }
+    },
+    {
+      "aid": 51009,
+      "trans": [ 1620.58,  46.68, 76.73 ], // translation
+      "etype": "lurkerpuppy", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1620.58,  46.68, 76.73, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-puppy-2",
+        "path": [
+          "vector4m",
+          [1620.58,  46.68, 76.73, 1.0],
+          [1627.76,  47.09, 44.18, 1.0],
+          [1651.49,  46.92, 24.88, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51000 ],
+        "nav-sphere-actor": [ "uint32", 51000 ]
+      }
+    },
+    {
+      "aid": 51010,
+      "trans": [ 1677.90,  46.55, -12.11 ], // translation
+      "etype": "lurkerpuppy", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1677.90,  46.55, -12.11, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-puppy-3",
+        "path": [
+          "vector4m",
+          [1677.90,  46.55, -12.11, 1.0],
+          [1652.79,  46.71, -16.83, 1.0],
+          [1622.61,  46.67,   4.00, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51000 ],
+        "nav-sphere-actor": [ "uint32", 51000 ]
+      }
+    },
+    {
+      "trans": [ 1409.83,  48.39,  94.43 ], // translation
+      "etype": "junglesnake", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1409.83,  48.39,  94.43, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-snake-4"
+      }
+    },
+    {
+      "trans": [ 1654.60, 46.25, 47.74], // translation
+      "etype": "junglesnake", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1409.83,  48.39,  94.43, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-snake-5"
+      }
+    },
+    {
+      "trans": [ 1631.99,  47.34, -17.49], // translation
+      "etype": "junglesnake", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1631.99,  47.34, -17.49, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-snake-6"
+      }
+    },
+    {
+      "aid": 51100,
+      "trans": [ 1397.33, 53.15, 58.96 ], // translation
+      "etype": "babak", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1397.33, 53.15, 58.96, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-babak-1",
+        "path": [
+          "vector4m",
+          [1397.33, 53.15, 58.96, 1.0],
+          [1390.56, 55.77, 68.43, 1.0],
+          [1384.5, 58.09, 76.73, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ]
+      }
+    },
+    {
+      "aid": 51101,
+      "trans": [ 1383.01, 58.84, 89.32 ], // translation
+      "etype": "babak", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1383.01, 58.84, 89.32, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-babak-2",
+        "path": [
+          "vector4m",
+          [1383.01, 58.84, 89.32, 1.0],
+          [1386.82, 60.16, 101.59, 1.0],
+          [1391.96, 60.59, 110.9, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51100 ]
+      }
+    },
+    {
+      "aid": 51102,
+      "trans": [ 1400.28, 61.45, 122.17 ], // translation
+      "etype": "babak", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1400.28, 61.45, 122.17, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-babak-3",
+        "path": [
+          "vector4m",
+          [1400.28, 61.45, 122.17, 1.0],
+          [1417.92, 61.61, 128.02, 1.0],
+          [1429.84, 61.63, 126.19, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51100 ]
+      }
+    },
+
+    {
+      "aid": 51103,
+      "trans": [ 1444.42, 61.65, 124.09 ], // translation
+      "etype": "babak", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1444.42, 61.65, 124.09, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-babak-4",
+        "path": [
+          "vector4m",
+          [1444.42, 61.65, 124.09, 1.0],
+          [1467.65, 62.6, 125.68, 1.0]
+          //[1429.84, 61.63, 126.19, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51100 ]
+      }
+    },
+    {
+      "aid": 51200,
+      "trans": [ 1592.29, 59.6, 123.94 ], // translation
+      "etype": "babak", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1592.29, 59.6, 123.94, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-babak-4",
+        "path": [
+          "vector4m",
+          [1592.29, 59.6, 123.94, 1.0],
+          [1597.22, 59.64, 114.91, 1.0],
+          [1604.96, 59.42, 107.22, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ]
+      }
+    },
+    {
+      "aid": 51201,
+      "trans": [ 1610.77, 54.85, 98.81 ], // translation
+      "etype": "babak", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1610.77, 54.85, 98.81, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-babak-5",
+        "path": [
+          "vector4m",
+          [1610.77, 54.85, 98.81, 1.0],
+          [1617.28, 54.16, 94.31, 1.0],
+          [1625.8, 52.92, 87.09, 1.0]
+
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51200 ]
+      }
+    },
+    ////////////////////////////////////////////////FINAL AREA//////////////////////////////
+    {
+      "aid": 51300,
+      "trans": [ 1772.98,  67.72, -52.17 ], // translation
+      "etype": "lurkercrab", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1772.98,  67.72, -52.17, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-lurkercrab-3",
+        "path": [
+          "vector4m",
+          [1772.98,  67.72, -52.17, 1.0],
+          [1759.50,  67.42, -42.83, 1.0],
+          [1729.21,  67.97, -49.59, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ]
+      }
+    },
+    {
+      "aid": 51301,
+      "trans": [ 1769.59,  67.82, -41.32 ], // translation
+      "etype": "lurkercrab", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1769.59,  67.82, -41.32, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-lurkercrab-4",
+        "path": [
+          "vector4m",
+          [1769.59,  67.82, -41.32, 1.0],
+          [1745.42,  67.41, -48.94, 1.0],
+          [1722.57,  67.26, -41.81, 1.0]
+          //[ -530.87, 106.70, 144.45, 1.0 ],
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ],
+        "nav-mesh-actor": [ "uint32", 51300 ]
+      }
+    },
+    {
+      "aid": 51400,
+      "trans": [ 1785.67, 70.42, -123.97 ], // translation
+      "etype": "aphid", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1785.67, 70.42, -123.97, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-aphid-16",
+        "path": [
+          "vector4m",
+          [1785.67, 70.42, -123.97, 1.0],
+          [1786.48, 70.47, -130.88, 1.0],
+          [1796.32, 70.47, -130.53, 1.0],
+          [1797.71, 70.60, -124.18, 1.0]
+          //[ -530.87, 100.70, 144.45, 1.0 ]
+        ]
+      }
+    },
+    {
+      "trans": [ 1770.03, 93.35, -125.67], // translation
+      "etype": "junglesnake", // actor type
+      "game_task": "(game-task none)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1770.03, 93.35, -125.67, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-snake-7"
+      }
+    },
+    /////////////////////////////////////////////////////AREA TWO SUNKEN TREASURE///////////////////////
+    {
+      "trans": [ 1524.78, 35.45, 68.38 ], // translation
+      "etype": "crate", // actor type
+      "game_task": "(game-task overgrown-treasure)", // associated game task (for powercells, etc)
+      "quat": [ 0, 0, 0, 1 ], // quaternion
+      "bsphere": [ 1524.78, 38.45,  68.38, 10 ], // bounding sphere
+      "lump": {
+        "name": "overgrown-treasure-cell",
+        "crate-type": "'steel",
+        "eco-info": ["int32", 6, 121],
+        "movie-pos": [ "meters", 1482.67, 54.65, 79.84 ]
+      }
+    },
+
+  //////////////////////////////////////YELLOW ECO AREA 2/////////////////////////////////////
+  {
+    "trans": [ 1527.61, 71.06, 125.16 ], // translation
+    "etype": "eco-yellow", // actor type
+    "game_task": "(game-task none)", // associated game task (for powercells, etc)
+    "quat": [ 0, 0, 0, 1 ], // quaternion
+    "bsphere": [ 1527.61, 71.06, 125.16, 10 ], // bounding sphere
+    "lump": {
+      "name": "overgrown-yellow-eco-1"
+    }
+  },
+  ///////////////////////////////////WARP GATE STUFF////////////////////////////////////
+  {
+    "trans": [ 1018.37,  0.47,  -5.25 ],
+    "etype": "warpgate",
+    "game_task": 0,
+    "quat": [ -0.1204, -0.1174, 0.6881, 0.7057 ],
+    "bsphere": [ 1018.37,  0.47,  -5.25, 10 ],
+    "lump": {
+      "name": "overgrown-warpgate"
+    }
+  },
+  
+  {
+    "trans": [ 1026.36,  0.16,  -2.74 ],
+    "etype": "warp-gate-switch",
+    "game_task": 122,
+    "quat": [ 0, 0, 0, 1 ],
+    "bsphere": [ 1026.36, 0.16, -2.74, 10 ],
+    "lump": {
+      "name": "overgrown-warp-gate-switch",
+      "alt-actor": "overgrown-training-part-1"
+    }
+  },
+  
+  {
+    "trans": [ 1017.0,  4.27,  -5.55 ],
+    "etype": "overgrown-part",
+    "game_task": 0,
+    "quat": [ 0.1204, 0.1174, -0.6881, -0.7057 ],
+    "bsphere": [ 1018.37,  0.47,  -5.25, 10 ],
+    "lump": {
+      "name": "overgrown-training-part-1",
+      "effect-name": "'warpgate-loop",
+      "art-name": "group-overgrown-warpgate",
+      "effect-param": [ "float", 3.0000, 80.0000, 12.0000, 40.0000 ],
+      "cycle-speed": [ "float", -1.0000, 0.0000 ]
+    }
+  },
+
+  ///////////////////////////////////IRIS DOOR BUTTON TRIGGERS//////////////////////////////
+  {
+    "aid": 52000,
+    "trans": [ 1203.86,  39.60,  14.06 ],
+    "etype": "overgrown-switch",
+    "game_task": 123,
+    "quat": [ 0, 0, 0, 1 ],
+    "bsphere": [ 1203.86,  39.31,  14.06, 10 ],
+    "lump": {
+      "name": "overgrown-iris-door-switch",
+      "alt-actor": "overgrown-irisdoor",
+      "scale": ["float", 0.7]
+    }
+  },
+  {
+    "aid": 52001,
+    "trans": [ 1783.82,  70.50, -124.77 ],
+    "etype": "overgrown-switch",
+    "game_task": 124,
+    "quat": [ 0, 0, 0, 1 ],
+    "bsphere": [ 1783.82,  70.20, -124.77, 10 ],
+    "lump": {
+      "name": "overgrown-iris-door-switch2",
+      "alt-actor": "overgrown-irisdoor",
+      "scale": ["float", 0.7]
+    }
+  },
+  {
+    "aid": 52003,
+    "trans": [ 1053.71, 0.73, -29.38 ],
+    "etype": "overgrown-switch",
+    "game_task": 125,
+    "quat": [ 0, 0, 0, 1 ],
+    "bsphere": [ 1783.82,  70.20, -124.77, 10 ],
+    "lump": {
+      "name": "overgrown-iris-door-switch3",
+      "alt-actor": "overgrown-irisdoor",
+      "scale": ["float", 0.7]
+    }
+  }
+  ]
+}
