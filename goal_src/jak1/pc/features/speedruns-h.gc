@@ -12,7 +12,7 @@
   ;; (full-game-all-flies 5) ;; All Flies
   ;; (full-game-all-orbs 6)  ;; All Orbs
   ;; Individual Levels
-  (il-training 100) ;; Geyser Rock IL
+  (overgrown 100) ;; Overgrown IL
   (il-village1 101) ;; Sandover Village IL
   (il-beach 102) ;; Sentinel Beach IL
   (il-jungle 103) ;; Forbidden Jungle IL

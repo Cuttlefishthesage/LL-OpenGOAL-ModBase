@@ -156,10 +156,10 @@
   (case (-> *speedrun-info* category)
     (((speedrun-category full-game))
      ;; spawn at the geyser warp gate checkpoint
-     (initialize! *game-info* 'game (the-as game-save #f) "game-start"))
-    (((speedrun-category il-training))
+     (initialize! *game-info* 'game (the-as game-save #f) "overgrown-warp"))
+    (((speedrun-category overgrown))
      ;; spawn at the geyser warp gate checkpoint
-     (initialize! *game-info* 'game (the-as game-save #f) "game-start"))
+     (initialize! *game-info* 'game (the-as game-save #f) "overgrown-warp"))
     (((speedrun-category il-village1))
      ;; spawn at the green sage hut warp gate
      (initialize! *game-info* 'game (the-as game-save #f) "village1-warp"))
@@ -223,7 +223,7 @@
      ;; don't allow cutscene skips
      (set! (-> *pc-settings* skip-movies?) #f)
      ;; spawn at the geyser warp gate checkpoint
-     (initialize! *game-info* 'game (the-as game-save #f) "intro-start"))
+     (initialize! *game-info* 'game (the-as game-save #f) "overgrown-warp"))
     (else
      (format 0 "start-speedrun: unrecognized category ~S~%" (enum->string speedrun-category (-> *speedrun-info* category)))))
   (enforce-speedrun-pc-settings)
@@ -239,7 +239,7 @@
       (((speedrun-category full-game))
        ;; skip intro cutscene
        (close-specific-task! (game-task intro) (task-status need-resolution)))
-      (((speedrun-category il-training))
+      (((speedrun-category overgrown))
        ;; skip intro cutscene
        (close-specific-task! (game-task intro) (task-status need-resolution))
        (mark-text-as-seen *game-info* (text-id training-level-name)))
