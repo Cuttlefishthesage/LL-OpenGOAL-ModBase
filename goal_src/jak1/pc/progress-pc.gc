@@ -773,22 +773,8 @@
        'boxed-array
        :type
        game-option
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-training) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-village1) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-beach) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-jungle) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-misty) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-firecanyon) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-village2) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-sunken) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-swamp) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-rolling) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-ogre) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-village3) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-snow) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-cave) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-lavatube) :scale #t)
-       (new 'static 'game-option :option-type (game-option-type button) :name (text-id speedrun-il-citadel) :scale #t)
+       (new 'static 'game-option :option-type (game-option-type button) :name (text-id overgrown) :scale #t)
+
        (new 'static 'game-option :option-type (game-option-type button) :name (text-id back) :scale #t)))
 
 (define *speedrun-cat-ext-options*
@@ -2461,7 +2447,7 @@
                  ;; Full game runs
                  (((text-id speedrun-new-full-game)) (progress-fast-save-and-start-speedrun (speedrun-category full-game)))
                  ;; Individual Levels
-                 (((text-id speedrun-il-training)) (progress-fast-save-and-start-speedrun (speedrun-category il-training)))
+                 (((text-id overgrown)) (progress-fast-save-and-start-speedrun (speedrun-category overgrown)))
                  (((text-id speedrun-il-village1)) (progress-fast-save-and-start-speedrun (speedrun-category il-village1)))
                  (((text-id speedrun-il-beach)) (progress-fast-save-and-start-speedrun (speedrun-category il-beach)))
                  (((text-id speedrun-il-jungle)) (progress-fast-save-and-start-speedrun (speedrun-category il-jungle)))
@@ -2758,7 +2744,7 @@
                 ;; Start a new game differently if speedrunning mode is active
                 (speedrun-start-full-game-run)
                 ;; start the game normally
-                (initialize! *game-info* 'game (the-as game-save #f) "intro-start"))
+                (initialize! *game-info* 'game (the-as game-save #f) "overgrown-warp"))
               (set-master-mode 'game))
              (else (sound-play "cursor-options") (set! (-> obj next-display-state) (progress-screen invalid)))))
           (((progress-screen memcard-insert))
@@ -2787,7 +2773,7 @@
               (cond
                 ((-> *pc-settings* speedrunner-mode?) (speedrun-start-full-game-run))
                 ;; start the game normally
-                (else (initialize! *game-info* 'game (the-as game-save #f) "intro-start")))
+                (else (initialize! *game-info* 'game (the-as game-save #f) "overgrown-warp")))
               (set-master-mode 'game))))
           (((progress-screen memcard-no-space) (progress-screen memcard-not-inserted) (progress-screen memcard-not-formatted))
            (cond
@@ -2799,7 +2785,7 @@
               (cond
                 ((-> *pc-settings* speedrunner-mode?) (speedrun-start-full-game-run))
                 ;; start the game normally
-                (else (initialize! *game-info* 'game (the-as game-save #f) "intro-start")))
+                (else (initialize! *game-info* 'game (the-as game-save #f) "overgrown-warp")))
               (set-master-mode 'game))
              ((nonzero? (-> obj display-state-stack 0)) (sound-play "start-options") (set-master-mode 'game))
              (else (sound-play "cursor-options") (set! (-> obj next-display-state) (progress-screen invalid)))))
@@ -2858,7 +2844,7 @@
               (cond
                 ((-> *pc-settings* speedrunner-mode?) (speedrun-start-full-game-run))
                 ;; start the game normally
-                (else (initialize! *game-info* 'game (the-as game-save #f) "intro-start")))
+                (else (initialize! *game-info* 'game (the-as game-save #f) "overgrown-warp")))
               (set-master-mode 'game))
              (else (sound-play "cursor-options") (set! (-> obj next-display-state) (progress-screen invalid)))))
           (((progress-screen quit-title))
