@@ -8,9 +8,9 @@ on:
         default: "jak4"
         type: "string"
       outputDir:
-        description: "The directory that the releases assets are created and temporarily stored in. Defaults to ./bundler"
+        description: "The directory that the releases assets are created and temporarily stored in. Defaults to `bundler`"
         required: false
-        default: "./bundler"
+        default: "bundler"
         type: "string"
       semverBump:
         description: "What semver bump to use - patch|minor|major. Defaults to patch"
