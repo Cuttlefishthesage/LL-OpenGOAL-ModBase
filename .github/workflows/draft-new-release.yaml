@@ -1,46 +1,35 @@
-name: 🏭 Draft Release
+# name: 🏭 Draft Release
 
-on:
-  workflow_dispatch:
-    inputs:
-      bump:
-        description: 'Semver Bump Type'
-        required: true
-        default: 'patch'
-        type: choice
-        options:
-          - patch
-          - minor
-          - major
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       bump:
+#         description: 'Semver Bump Type'
+#         required: true
+#         default: 'patch'
+#         type: choice
+#         options:
+#           - patch
+#           - minor
+#           - major
 
-permissions:
-  contents: write
+# jobs:
+#   cut-release:
+#     runs-on: ubuntu-latest
+#     steps:
+#       # Docs - https://github.com/mathieudutour/github-tag-action
+#       # Workflows cannot trigger other workflows implicitly
+#       # - https://github.community/t/github-actions-workflow-not-triggering-with-tag-push/17053/7
+#       - name: Bump Version and Push Tag
+#         if: github.repository == 'open-goal/jak-project'
+#         id: tag_version
+#         uses: mathieudutour/github-tag-action@v6.2
+#         with:
+#           github_token: ${{ secrets.BOT_PAT }}
+#           tag_prefix: v
+#           default_bump: ${{ github.event.inputs.bump }}
 
-jobs:
-  cut-release:
-    runs-on: ubuntu-latest
-    steps:
-      # Docs - https://github.com/mathieudutour/github-tag-action
-      # Workflows cannot trigger other workflows implicitly
-      # - https://github.community/t/github-actions-workflow-not-triggering-with-tag-push/17053/7
-      - name: Bump Version and Push Tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag_prefix: v
-          default_bump: ${{ github.event.inputs.bump }}
-
-      - name: Write tag to file
-        run: echo "${{ steps.tag_version.outputs.new_tag }}" > tag.txt
-  
-      - name: Upload tag
-        uses: actions/upload-artifact@v2
-        with:
-          name: tag
-          path: tag.txt
-
-      - name: Create Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create ${{ steps.tag_version.outputs.new_tag }} --generate-notes --draft --repo ${{ github.repository }}
+#       - name: Create Release
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.BOT_PAT }}
+#         run: gh release create ${{ steps.tag_version.outputs.new_tag }} --generate-notes --draft --repo open-goal/jak-project
